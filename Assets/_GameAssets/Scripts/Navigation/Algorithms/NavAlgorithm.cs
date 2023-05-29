@@ -6,15 +6,6 @@ namespace VG.GameAI.Navigation2D
 {
     public abstract class NavAlgorithm : MonoBehaviour
     {
-        protected struct HeuristicVertex : IComparable
-        {
-            public NavVertex navVertex;
-            public float heuristic;
-
-            public int CompareTo(object obj)
-                => heuristic.CompareTo(((HeuristicVertex)obj).heuristic);
-        }
-
 
         public abstract List<NavVertex> FindPath(List<NavVertex> vertices, NavVertex begin, NavVertex end);
 
@@ -33,6 +24,7 @@ namespace VG.GameAI.Navigation2D
             }
 
             currentVertex.state = NavVertex.State.Start;
+            path.Add(currentVertex);
             path.Reverse();
             return path;
         }

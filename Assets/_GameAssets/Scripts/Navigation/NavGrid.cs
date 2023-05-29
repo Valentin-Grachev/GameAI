@@ -39,12 +39,12 @@ namespace VG.GameAI.Navigation2D
             
             var vertexPath = _navAlgorithm.FindPath(_data.vertices, beginVertex, endVertex);
             
-            List<Vector2> worldPath = new List<Vector2>();
+            List<Vector2> worldVertexPath = new List<Vector2>();
             if (vertexPath != null)
                 foreach (var vertex in vertexPath)
-                    worldPath.Add(vertex.worldPosition);
+                    worldVertexPath.Add(vertex.worldPosition);
             
-            return worldPath;
+            return SmoothPath(worldVertexPath);
         }
 
 
@@ -145,6 +145,40 @@ namespace VG.GameAI.Navigation2D
         }
 
 
+        private List<Vector2> SmoothPath(List<Vector2> worldVertexPath)
+        {
+            List<Vector2> smoothedPath = new List<Vector2>();
+
+            int fromIndex = 0;
+            int endIndex = worldVertexPath.Count - 1;
+            int handleIndex = endIndex;
+
+            while (fromIndex < endIndex)
+            {
+                Vector2 from = worldVertexPath[fromIndex];
+                Vector2 to = worldVertexPath[handleIndex];
+                
+                if (Physics2D.Raycast(origin: from, direction: to - from,
+                    distance: Vector2.Distance(from, to), layerMask: 1 << LayerMask.NameToLayer("NavObstacle")))
+                {
+                    handleIndex = (fromIndex + handleIndex) / 2;
+                }
+                else
+                {
+                    smoothedPath.Add(to);
+                    fromIndex = handleIndex;
+                    handleIndex = endIndex;
+                }
+            }
+
+            //smoothedPath.Add(worldVertexPath[endIndex]);
+
+            //DrawPath(smoothedPath);
+
+            return smoothedPath;
+        }
+
+
 
         private void OnDrawGizmosSelected()
         {
@@ -175,6 +209,17 @@ namespace VG.GameAI.Navigation2D
             }
         }
 
+
+        private void DrawPath(List<Vector2> path)
+        {
+            
+
+            for (int i = 0; i < path.Count; i++)
+            {
+                Instantiate(data.obstacleVertex, position: path[i], Quaternion.identity);
+            }
+                
+        }
 
     }
 }

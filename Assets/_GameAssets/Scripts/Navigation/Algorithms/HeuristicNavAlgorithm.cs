@@ -1,26 +1,22 @@
 using DataStructures;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace VG.GameAI.Navigation2D
 {
-    public class AStar_NavAlgorithm : NavAlgorithm
+    public abstract class HeuristicNavAlgorithm : NavAlgorithm
     {
-        
 
-        private void PushToHeap(BinaryHeap<HeuristicVertex> heap, NavVertex vertex, NavVertex begin, NavVertex end)
+        private struct HeuristicVertex : IComparable
         {
-            HeuristicVertex heapVertex = new HeuristicVertex();
-            heapVertex.navVertex = vertex;
+            public NavVertex navVertex;
+            public float heuristic;
 
-            vertex.GridPosition(out int x, out int y);
-            end.GridPosition(out int endX, out int endY);
-
-            heapVertex.heuristic = Mathf.Abs(x - endX) + Mathf.Abs(y - endY);
-            heap.Push(heapVertex);
+            public int CompareTo(object obj)
+                => heuristic.CompareTo(((HeuristicVertex)obj).heuristic);
         }
-
 
         public override List<NavVertex> FindPath(List<NavVertex> vertices, NavVertex begin, NavVertex end)
         {
@@ -66,10 +62,19 @@ namespace VG.GameAI.Navigation2D
         }
 
 
+        private void PushToHeap(BinaryHeap<HeuristicVertex> heap, NavVertex current, NavVertex begin, NavVertex end)
+        {
+            var heapVertex = new HeuristicVertex();
+            heapVertex.navVertex = current;
+            heapVertex.heuristic = GetHeuristic(current, begin, end);
+            heap.Push(heapVertex);
+        }
+
+
+        protected abstract float GetHeuristic(NavVertex current, NavVertex begin, NavVertex end);
 
 
     }
-
 }
 
 

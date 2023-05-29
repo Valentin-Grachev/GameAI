@@ -14,7 +14,6 @@ namespace VG.GameAI.Navigation2D
             grid.WorldPositionToGridPosition(fromPosition, onlyInside: false, out int fromX, out int fromY);
             grid.WorldPositionToGridPosition(toPosition, onlyInside: false, out int toX, out int toY);
 
-            print("From: " + fromX + " " + fromY + "; To: " + toX + " " + toY);
 
             for (int y = fromY; y <= toY; y++)
                 for (int x = fromX; x <= toX; x++)

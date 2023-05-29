@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e22fdb5481f1704eae206206a9d0d87, type: 3}
-  m_Name: NavGridData
+  m_Name: NavGrid
   m_EditorClassIdentifier: 
   emptyVertex: {fileID: 6489779216404890603, guid: 60b81fc394e8b604cab308cca9dbccae, type: 3}
   visitedVertex: {fileID: 6489779216404890603, guid: 60e66bb82088c78408a36e36f4698053, type: 3}
