@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e22fdb5481f1704eae206206a9d0d87, type: 3}
+  m_Name: NavGridData
+  m_EditorClassIdentifier: 
+  emptyVertex: {fileID: 6489779216404890603, guid: 60b81fc394e8b604cab308cca9dbccae, type: 3}
+  visitedVertex: {fileID: 6489779216404890603, guid: 60e66bb82088c78408a36e36f4698053, type: 3}
+  pathVertex: {fileID: 6489779216404890603, guid: 2433d8959cb19d040bb55dbedab906e4, type: 3}
+  startVertex: {fileID: 6489779216404890603, guid: dc9d8a705a5d7ea4d9e221ea8232bb67, type: 3}
+  obstacleVertex: {fileID: 6489779216404890603, guid: 10e2a818f67b1fd42a5b226a7a47f87d, type: 3}
+  vertices: []
+  rows: 20
+  cols: 20
