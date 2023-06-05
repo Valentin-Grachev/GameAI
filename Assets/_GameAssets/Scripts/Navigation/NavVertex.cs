@@ -9,6 +9,9 @@ namespace VG.GameAI.Navigation2D
     [System.Serializable]
     public class NavVertex
     {
+        public static bool visualisation;
+
+
         public enum State { Empty, Start, Visited, Path, Obstacle }
 
         public NavGrid navGrid { get; set; }
@@ -71,7 +74,9 @@ namespace VG.GameAI.Navigation2D
 
 
         public void VisualiseState()
-        { 
+        {
+            if (!visualisation) return;
+
             if (_instVisualObject != null)
                 Object.DestroyImmediate(_instVisualObject);
 

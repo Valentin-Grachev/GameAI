@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using NaughtyAttributes;
 
 
 namespace VG.GameAI.Navigation2D
@@ -8,6 +9,8 @@ namespace VG.GameAI.Navigation2D
     [System.Serializable]
     public class NavGrid : MonoBehaviour
     {
+        [SerializeField] private bool _visualisation;
+        [Space(10)]
         [SerializeField] private NavGridData _data; public NavGridData data { get => _data; }
         [SerializeField] private NavAlgorithm _navAlgorithm;
         [Space(10)]
@@ -23,6 +26,7 @@ namespace VG.GameAI.Navigation2D
 
         private void Awake()
         {
+            NavVertex.visualisation = _visualisation;
             LoadGrid();
         }
 
@@ -49,9 +53,10 @@ namespace VG.GameAI.Navigation2D
 
 
 
-        [ContextMenu(nameof(Bake))]
+        [Button(nameof(Bake))]
         private void Bake()
         {
+            NavVertex.visualisation = _visualisation;
             EditorUtility.SetDirty(_data);
 
             _data.cols = (int)(_areaSize.x / _vertexSize);

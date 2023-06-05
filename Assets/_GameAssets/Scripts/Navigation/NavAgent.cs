@@ -21,7 +21,8 @@ namespace VG.GameAI.Navigation2D
         {
             _path = _navGrid.FindPath(transform.position, destination);
             _nextPointIndex = 0;
-            _goalReached = false;
+            if (_path.Count > 0) _goalReached = false;
+            else _goalReached = true;
         }
 
         private void Update()
