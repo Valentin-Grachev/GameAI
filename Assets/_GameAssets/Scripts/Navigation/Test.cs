@@ -5,12 +5,12 @@ using UnityEngine.AI;
 public class Test : MonoBehaviour
 {
     [SerializeField] private NavAgent _navAgent;
-    //[SerializeField] private NavMeshAgent _meshAgent;
+    [SerializeField] private NavMeshAgent _meshAgent;
 
     private void Start()
     {
-        //_meshAgent.updateRotation = false;
-        //_meshAgent.updateUpAxis = false;
+        _meshAgent.updateRotation = false;
+        _meshAgent.updateUpAxis = false;
     }
 
 
@@ -19,12 +19,13 @@ public class Test : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _navAgent.SetDestination(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            _meshAgent.isStopped = true;
         }
-        //else if (Input.GetMouseButtonDown(1))
-        //{
-        //    
-        //    _meshAgent.SetDestination((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //    print((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //}
+        else if (Input.GetMouseButtonDown(1))
+        {
+            _meshAgent.isStopped = false;
+            _meshAgent.SetDestination((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            print((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
     }
 }
