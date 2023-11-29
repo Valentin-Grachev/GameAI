@@ -1,5 +1,3 @@
-using DataStructures;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace VG.GameAI.Navigation2D
