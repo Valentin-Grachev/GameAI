@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navGrid: {fileID: 0}
-  _speed: 5
+  _speed: 20
 --- !u!114 &6591276904445530155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,8 +125,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.001
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 30
+  m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0.2
@@ -136,4 +136,4 @@ NavMeshAgent:
   m_Height: 0.64
   m_BaseOffset: 0.32
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
