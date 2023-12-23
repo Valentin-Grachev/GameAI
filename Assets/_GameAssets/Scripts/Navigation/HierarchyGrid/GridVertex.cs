@@ -6,8 +6,9 @@ namespace VG.GameAI.Navigation2D
     [System.Serializable]
     public class GridVertex
     {
-        private LocalGrid _localGraph;
-        private int _gridId;
+        private Vector2 _position;
+
+
         private GridVertex[] _neighbours;
 
 
@@ -20,16 +21,23 @@ namespace VG.GameAI.Navigation2D
         }
 
 
-        public GridVertex(LocalGrid localGraph, int gridId)
+        public GridVertex(Vector2 position)
         {
-            _localGraph = localGraph;
-            _gridId = gridId;
+            _position = position;
+            //_gridId = gridId;
         }
 
         public void Bind(in GridVertex[] neighbours)
         {
             _neighbours = neighbours;
         }
+
+        public void DrawGizmos(float vertexSize)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(_position, vertexSize / 4f);
+        }
+
 
     }
 }

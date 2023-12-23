@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ namespace VG.GameAI.Navigation2D
     [System.Serializable]
     public class LocalGrid
     {
-        private int _globalId;
+        private Vector2 _position;
         private float _vertexSize = 1f;
         private float _graphSize = 10f;
 
@@ -21,11 +20,13 @@ namespace VG.GameAI.Navigation2D
 
 
 
-        public LocalGrid(int globalId, float vertexSize, float graphSize)
+        public LocalGrid(Vector2 position, float vertexSize, float graphSize)
         {
-            _globalId = globalId;
+            _position = position;
             _vertexSize = vertexSize;
             _graphSize = graphSize;
+
+            Build();
         }
 
 
@@ -40,12 +41,19 @@ namespace VG.GameAI.Navigation2D
         {
             _vertices = new List<GridVertex>();
 
+            int cols = (int)(_graphSize / _vertexSize);
+            int rows = cols;
 
-            for (int i = 0; i < verticesQuantity; i++)
-            {
-                var vertex = new GridVertex(localGraph: this, i);
-                _vertices.Add(vertex);
-            }
+            for (int y = 0; y < rows; y++)
+                for (int x = 0; x < cols; x++)
+                {
+                    var vertex = new GridVertex(
+                    position: new Vector2(
+                        x: _position.x + _vertexSize * x + _vertexSize / 2f,
+                        y: _position.y - _vertexSize * y - _vertexSize / 2f));
+
+                    _vertices.Add(vertex);
+                }
 
         }
 
@@ -84,7 +92,16 @@ namespace VG.GameAI.Navigation2D
 
         public void DrawGizmos()
         {
+            Vector2 center = new Vector2(
+                x: _position.x + _graphSize / 2,
+                y: _position.y - _graphSize / 2);
+
             Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(center, _graphSize * Vector2.one);
+
+            if (_vertices != null)
+                foreach (var vertex in _vertices)
+                    vertex.DrawGizmos(_vertexSize);
             
         }
 
