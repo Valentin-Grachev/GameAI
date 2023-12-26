@@ -4,7 +4,7 @@ using UnityEngine;
 namespace VG.GameAI.Navigation2D
 {
 
-    public enum NeighbourSide { Right = 0, Up = 1, Left = 2, Down = 3 }
+    
 
     [System.Serializable]
     public class NavVertex
