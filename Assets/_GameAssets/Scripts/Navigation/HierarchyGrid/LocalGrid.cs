@@ -153,6 +153,7 @@ namespace VG.GameAI.Navigation2D
             return transitions;
         }
 
+        // —оздание глобальной вершины посередине прохода
         private void AddAverageToTransitions(List<Vector2> positions, List<TransitVertex> transitions)
         {
             var firstPosition = positions[0];
