@@ -12,14 +12,16 @@ namespace VG.GameAI.Navigation2D
         public Vertex visitedFrom => _visitedFrom;
 
 
-        public abstract int[] neighbourIds { get; }
+        public abstract int[] neighbourIds { get; } // ?
+
+        public abstract float GetEdgeWeight(int neighbourId); // ?
+
+        public abstract int id { get; } // ?
 
         public bool visited => _visitedFrom != null;
 
-        public void Visit(Vertex from)
-        {
-            _visitedFrom = from;
-        }
+        public void Visit(Vertex from) => _visitedFrom = from;
+
 
         public void ClearState() => _visitedFrom = null;
 

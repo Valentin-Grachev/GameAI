@@ -7,6 +7,11 @@ namespace VG.GameAI.Navigation2D
     [System.Serializable]
     public class TransitVertex : Vertex
     {
+        public static int verticesQuantity { get; private set; }
+        public static void ClearIds() => verticesQuantity = 0;
+
+
+
         public struct Path
         {
             public Vector2[] points;
@@ -26,26 +31,31 @@ namespace VG.GameAI.Navigation2D
         }
 
 
-        public int id;
+        private int _id;
         public int[] neighbourVertexIds;
         public Path[] neighbourVertexPaths;
 
         public override int[] neighbourIds => neighbourVertexIds;
 
+        public override int id => _id;
 
         private List<int> _neighbourIdsList;
         private List<Path> _pathsList;
 
 
-        public TransitVertex(Vector2 position, int id)
+        public override float GetEdgeWeight(int neighbourId) => _pathsList[neighbourId].length;
+
+
+        public TransitVertex(Vector2 position)
         {
             this.position = position;
-            this.id = id;
+            _id = verticesQuantity;
+            verticesQuantity++;
         }
 
         
 
-        public void Bind(TransitVertex vertex, List<Vector2> pathPoints)
+        public void Bind(TransitVertex vertex, List<GridVertex> pathPoints)
         {
             _neighbourIdsList ??= new List<int>();
             _pathsList ??= new List<Path>();
@@ -55,18 +65,27 @@ namespace VG.GameAI.Navigation2D
             _neighbourIdsList.Add(vertex.id);
             vertex._neighbourIdsList.Add(id);
 
-            List<Vector2> reversedPathPoints = new List<Vector2>(pathPoints);
+            List<GridVertex> reversedPathPoints = new List<GridVertex>(pathPoints);
             reversedPathPoints.Reverse();
+
+            List<Vector2> positionPath = new List<Vector2>(pathPoints.Count);
+            foreach (var vertexPoint in pathPoints)
+                positionPath.Add(vertexPoint.position);
+
+            List<Vector2> reversedPositionPath = new List<Vector2>(reversedPathPoints.Count);
+            foreach (var vertexPoint in reversedPathPoints)
+                reversedPositionPath.Add(vertexPoint.position);
+
 
             Path path = new Path(
                 from: this.position,
                 to: vertex.position,
-                points: pathPoints.ToArray());
+                points: positionPath.ToArray());
 
             Path reversedPath = new Path(
                 from: this.position,
                 to: vertex.position,
-                points: reversedPathPoints.ToArray());
+                points: reversedPositionPath.ToArray());
 
 
             _pathsList.Add(path);
@@ -118,5 +137,6 @@ namespace VG.GameAI.Navigation2D
 
         }
 
+        
     }
 }

@@ -160,8 +160,7 @@ namespace VG.GameAI.Navigation2D
             var lastPosition = positions[positions.Count - 1];
             Vector2 averagePosition = (firstPosition + lastPosition) / 2f;
 
-            var transitVertex = new TransitVertex(averagePosition, id: GlobalGrid.transitVertexCount);
-            GlobalGrid.transitVertexCount++;
+            var transitVertex = new TransitVertex(averagePosition);
             transitions.Add(transitVertex);
             positions.Clear();
         }
@@ -181,7 +180,7 @@ namespace VG.GameAI.Navigation2D
                     var finishGridVertex = GetGridVertex(localTransitVertices[j].position);
 
                     if (PathFinder.FindPathBFS(graph: _gridVertices,
-                        start: startGridVertex, finish: finishGridVertex, out List<Vector2> path))
+                        start: startGridVertex, finish: finishGridVertex, out List<GridVertex> path))
                         localTransitVertices[i].Bind(localTransitVertices[j], path);
                 }
             }

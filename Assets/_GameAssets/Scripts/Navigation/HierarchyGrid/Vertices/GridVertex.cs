@@ -19,6 +19,8 @@ namespace VG.GameAI.Navigation2D
 
         public override int[] neighbourIds => neighbourVertexIds;
 
+        public override int id => throw new System.NotImplementedException();
+
         public void Bind(in int[] neighbourVertexIds)
         {
             this.neighbourVertexIds = neighbourVertexIds;
@@ -38,7 +40,7 @@ namespace VG.GameAI.Navigation2D
 
         }
 
-
+        public override float GetEdgeWeight(int neighbourId) => 1f;
     }
 }
 

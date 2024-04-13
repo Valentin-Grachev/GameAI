@@ -6,9 +6,6 @@ namespace VG.GameAI.Navigation2D
 {
     public class GlobalGrid : MonoBehaviour
     {
-        public static int transitVertexCount = 0;
-
-
         [SerializeField] private Vector2 _size;
         [SerializeField] private float _vertexSize;
         [SerializeField] private float _localGraphSize;
@@ -24,8 +21,7 @@ namespace VG.GameAI.Navigation2D
         [Button("Build")]
         public void Build()
         {
-            transitVertexCount = 0;
-
+            TransitVertex.ClearIds();
             DeleteGrid();
 
             CreateLocalGrids();
@@ -88,6 +84,8 @@ namespace VG.GameAI.Navigation2D
             foreach (var localGrid in _localGrids)
                 localGrid.BindTransitVertices(_transitVertices);
         }
+
+
 
 
         private void OnDrawGizmos()
