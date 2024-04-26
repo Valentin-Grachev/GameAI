@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6591276904445530150}
   - component: {fileID: 6591276904445530153}
   - component: {fileID: 6591276904445530152}
-  - component: {fileID: 6591276904445530155}
   - component: {fileID: 6591276904445530151}
   m_Layer: 0
   m_Name: Agent
@@ -101,20 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navGrid: {fileID: 0}
   _speed: 5
---- !u!114 &6591276904445530155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6591276904445530154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b3772a95f8180449a85bd283fe0e8dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _navAgent: {fileID: 6591276904445530152}
-  _meshAgent: {fileID: 6591276904445530151}
 --- !u!195 &6591276904445530151
 NavMeshAgent:
   m_ObjectHideFlags: 0
