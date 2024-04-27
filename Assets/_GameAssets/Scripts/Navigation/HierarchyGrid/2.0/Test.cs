@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private float _edgeSize;
     [SerializeField] private float _gridSize;
+    [SerializeField] private int _density;
+    
     [SerializeField] private List<int> _removeVertexIds;
     [Space(10)]
     [SerializeField] private int _fromVertexId;
@@ -13,14 +14,14 @@ public class Test : MonoBehaviour
     [Space(10)]
     [SerializeField] private GraphData _graphData;
 
-    [SerializeReference] private GridGraph _gridGraph;
+    [SerializeReference] private LocalGrid _gridGraph;
     private List<ushort> _path;
 
 
     [Button(nameof(Generate))]
     private void Generate()
     {
-        _gridGraph = new GridGraph(transform.position, _edgeSize, _gridSize);
+        _gridGraph = new LocalGrid(transform.position, _density, _gridSize);
         foreach (var item in _removeVertexIds)
             _gridGraph.RemoveVertex(item);
     }
@@ -28,17 +29,13 @@ public class Test : MonoBehaviour
     [Button(nameof(SaveData))]
     private void SaveData()
     {
-        GraphData newData = ScriptableObject.CreateInstance<GraphData>();
-        newData.graph = new Graph(_gridGraph.graph);
-
-        UnityEditor.AssetDatabase.CreateAsset(newData, "Assets/NewData.asset");
-        UnityEditor.AssetDatabase.SaveAssets();
+        _graphData.SaveGraph(_gridGraph.graph);
     }
 
     [Button(nameof(LoadData))]
     private void LoadData()
     {
-        _gridGraph = new GridGraph(_graphData, transform.position, _edgeSize, _gridSize);
+        _gridGraph = new LocalGrid(_graphData.GetGraph(), transform.position, _density, _gridSize);
     }
 
 
@@ -73,7 +70,7 @@ public class Test : MonoBehaviour
             foreach (var vertexId in _path)
             {
                 Vector2 vertexPosition = _gridGraph.GetVertexPosition(vertexId);
-                Gizmos.DrawWireSphere(vertexPosition, _edgeSize / 2f);
+                Gizmos.DrawWireSphere(vertexPosition, _density / 2f);
             }
                 
 

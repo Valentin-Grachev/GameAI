@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class GridGraph
+public class LocalGrid
 {
     private Graph _graph; public Graph graph => _graph;
 
@@ -12,25 +12,24 @@ public class GridGraph
 
     private int _verticesInRow;
 
-    public GridGraph(GraphData graphData, Vector2 pivotPosition, float edgeSize, float gridSize)
+    public LocalGrid(Graph graph, Vector2 pivotPosition, int density, float gridSize)
     {
-        SetStartParameters(pivotPosition, edgeSize, gridSize);
-        _graph = graphData.graph;
+        SetStartParameters(pivotPosition, density, gridSize);
+        _graph = graph;
     }
 
 
-    public GridGraph(Vector2 pivotPosition, float edgeSize, float gridSize)
+    public LocalGrid(Vector2 startPosition, int density, float size)
     {
-        SetStartParameters(pivotPosition, edgeSize, gridSize);
+        SetStartParameters(startPosition, density, size);
         _graph = GenerateGraph(_verticesInRow);
     }
 
-    private void SetStartParameters(Vector2 pivotPosition, float edgeSize, float gridSize)
+    private void SetStartParameters(Vector2 startPosition, int density, float gridSize)
     {
-        _startPosition = new Vector2(pivotPosition.x - gridSize / 2f, pivotPosition.y + gridSize / 2f);
-        _startPosition += new Vector2(edgeSize / 2f, -edgeSize / 2f);
-        _edgeSize = edgeSize;
-        _verticesInRow = (int)(gridSize / edgeSize);
+        _edgeSize = gridSize / density;
+        _startPosition = startPosition + new Vector2(_edgeSize / 2f, -_edgeSize / 2f);
+        _verticesInRow = density;
     }
 
 

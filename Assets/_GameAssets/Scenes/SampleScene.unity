@@ -236,19 +236,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3772a95f8180449a85bd283fe0e8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _edgeSize: 0.8
-  _gridSize: 4.87
+  _gridSize: 10
+  _density: 0
   _removeVertexIds: 0500000007000000080000001b000000100000001200000011000000
   _fromVertexId: 0
   _toVertexId: 33
-  _graphData: {fileID: 11400000, guid: 9f74a7bdb0812564da29b854270f8e7f, type: 2}
+  _graphData: {fileID: 11400000, guid: c7bff48308f96fa41bd00e82919ff884, type: 2}
   _gridGraph:
-    rid: 2233662864135028737
+    rid: 2233662886116327426
   references:
     version: 2
     RefIds:
-    - rid: 2233662864135028737
-      type: {class: GridGraph, ns: , asm: Assembly-CSharp}
+    - rid: 2233662886116327426
+      type: {class: LocalGrid, ns: , asm: Assembly-CSharp}
 --- !u!4 &1605526166
 Transform:
   m_ObjectHideFlags: 0
@@ -263,4 +263,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2139084145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2139084147}
+  - component: {fileID: 2139084146}
+  m_Layer: 0
+  m_Name: NavSurface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2139084146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139084145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d81b11de58b7824bb0ee48e50ab7111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _size: 11.51
+  _localGridRows: 4
+  _localGridDensity: 10
+--- !u!4 &2139084147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139084145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4, y: 0.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
