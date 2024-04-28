@@ -1,11 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class Binding
 {
-    public enum BindSize { Right, Down }
+    
+    public enum SplitMode { Horizontal, Vertical }
+    public static SplitMode SplitArea(Vector2 size, int density,
+        out float edgeSize, out int rows, out int cols)
+    {
+        bool horizontalMode = size.x >= size.y;
+        bool squareMode = Mathf.Approximately(size.x, size.y);
+        edgeSize = Mathf.Max(size.x, size.y) / density;
 
+        if (squareMode)
+        {
+            rows = density;
+            cols = density;
+        }
+        else
+        {
+            rows = horizontalMode ? (int)(size.y / edgeSize) : density;
+            cols = horizontalMode ? density : (int)(size.x / edgeSize);
+        }
+        
+
+        return horizontalMode ? SplitMode.Horizontal : SplitMode.Vertical;
+    }
+
+
+    public enum BindSize { Right, Down }
     public static List<Vector2> GetBindingNodes(LocalGrid first, LocalGrid second, BindSize bindSize)
     {
         throw null;

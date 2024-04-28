@@ -7,47 +7,47 @@ public class LocalGrid
 {
     private Graph _graph; public Graph graph => _graph;
 
-    private Vector2 _startPosition;
+    private Vector2 _startPosition, _size;
     private float _edgeSize;
 
-    private int _verticesInRow;
+    private int _rows, _cols;
 
-    public LocalGrid(Graph graph, Vector2 pivotPosition, int density, float gridSize)
+    public LocalGrid(Graph graph, Vector2 startPosition, Vector2 size, int density)
     {
-        SetStartParameters(pivotPosition, density, gridSize);
+        SetStartParameters(startPosition, size, density);
         _graph = graph;
     }
 
 
-    public LocalGrid(Vector2 startPosition, int density, float size)
+    public LocalGrid(Vector2 startPosition, Vector2 size, int density)
     {
-        SetStartParameters(startPosition, density, size);
-        _graph = GenerateGraph(_verticesInRow);
+        SetStartParameters(startPosition, size, density);
+        _graph = GenerateGraph(_rows, _cols);
     }
 
-    private void SetStartParameters(Vector2 startPosition, int density, float gridSize)
+    private void SetStartParameters(Vector2 startPosition, Vector2 size, int density)
     {
-        _edgeSize = gridSize / density;
+        Binding.SplitArea(size, density, out _edgeSize, out _rows, out _cols);
+        _size = size;
         _startPosition = startPosition + new Vector2(_edgeSize / 2f, -_edgeSize / 2f);
-        _verticesInRow = density;
     }
 
 
-    private Graph GenerateGraph(int size)
+    private Graph GenerateGraph(int rows, int cols)
     {
-        Graph grid = new Graph(size * size);
+        Graph grid = new Graph(rows * cols);
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < size; j++)
+            for (int j = 0; j < cols; j++)
             {
-                int vertexId = i * size + j;
+                int vertexId = i * cols + j;
 
-                if (vertexId % size < size - 1)
+                if (vertexId % cols < cols - 1)
                     grid.CreateEdge(vertexId, (ushort)(vertexId + 1), weight: 1);
 
-                if (vertexId / size < size - 1)
-                    grid.CreateEdge(vertexId, (ushort)(vertexId + size), weight: 1);
+                if (vertexId / cols < rows - 1)
+                    grid.CreateEdge(vertexId, (ushort)(vertexId + cols), weight: 1);
             }
         }
 
@@ -56,16 +56,23 @@ public class LocalGrid
 
     public Vector2 GetVertexPosition(int vertexId)
     {
-        int x = vertexId % _verticesInRow;
-        int y = vertexId / _verticesInRow;
+        int x = vertexId % _cols;
+        int y = vertexId / _cols;
 
         return new Vector2(_startPosition.x + x * _edgeSize, _startPosition.y - y * _edgeSize);
     }
 
 
-    public void DrawGizmos(Color color)
+    public void DrawGizmos()
     {
-        Gizmos.color = color;
+        Gizmos.color = Color.cyan;
+
+        Vector2 drawGridSizePosition = _startPosition + new Vector2(_size.x / 2f, -_size.y / 2f) 
+            + new Vector2(-_edgeSize / 2f, _edgeSize / 2f);
+
+        Gizmos.DrawWireCube(drawGridSizePosition, _size);
+
+        Gizmos.color = Color.blue;
 
         for (int vertexId = 0; vertexId < _graph.vertexQuantity; vertexId++)
         {

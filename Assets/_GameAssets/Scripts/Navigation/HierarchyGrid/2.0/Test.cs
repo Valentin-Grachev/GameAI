@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private float _gridSize;
+    [SerializeField] private Vector2 _gridSize;
     [SerializeField] private int _density;
     
     [SerializeField] private List<int> _removeVertexIds;
@@ -21,7 +21,7 @@ public class Test : MonoBehaviour
     [Button(nameof(Generate))]
     private void Generate()
     {
-        _gridGraph = new LocalGrid(transform.position, _density, _gridSize);
+        _gridGraph = new LocalGrid(transform.position, _gridSize, _density);
         foreach (var item in _removeVertexIds)
             _gridGraph.RemoveVertex(item);
     }
@@ -35,7 +35,7 @@ public class Test : MonoBehaviour
     [Button(nameof(LoadData))]
     private void LoadData()
     {
-        _gridGraph = new LocalGrid(_graphData.GetGraph(), transform.position, _density, _gridSize);
+        //_gridGraph = new LocalGrid(_graphData.GetGraph(), transform.position, _density, _gridSize);
     }
 
 
@@ -57,9 +57,10 @@ public class Test : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, Vector2.one * _gridSize);
+        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(_gridSize.x / 2f, -_gridSize.y / 2f), 
+            Vector2.one * _gridSize);
 
-        _gridGraph?.DrawGizmos(Color.blue);
+        _gridGraph?.DrawGizmos();
 
         if (_path != null)
         {
