@@ -4,60 +4,73 @@ using UnityEngine;
 public static class Binding
 {
     
-    public enum SplitMode { Horizontal, Vertical }
-    public static SplitMode SplitArea(Vector2 size, int density,
+    public static void SplitArea(Vector2 size, float density,
         out float edgeSize, out int rows, out int cols)
     {
-        bool horizontalMode = size.x >= size.y;
-        bool squareMode = Mathf.Approximately(size.x, size.y);
-        edgeSize = Mathf.Max(size.x, size.y) / density;
-
-        if (squareMode)
-        {
-            rows = density;
-            cols = density;
-        }
-        else
-        {
-            rows = horizontalMode ? (int)(size.y / edgeSize) : density;
-            cols = horizontalMode ? density : (int)(size.x / edgeSize);
-        }
-        
-
-        return horizontalMode ? SplitMode.Horizontal : SplitMode.Vertical;
+        edgeSize = 10f / density;
+        rows = (int)(size.y / edgeSize);
+        cols = (int)(size.x / edgeSize);
     }
 
 
-    public enum BindSize { Right, Down }
-    public static List<Vector2> GetBindingNodes(LocalGrid first, LocalGrid second, BindSize bindSize)
+    public enum BindSide { Right, Down }
+    public static List<Vector2> GetBindingNodes(LocalGrid firstGrid, LocalGrid secondGrid, BindSide bindSide)
     {
-        throw null;
-        /*
-        var bindingNodePositions = new List<Vector2>();
+        var bindingNodes = new List<Vector2>();
+        List<Vector2> transitions = new List<Vector2>();
+        int verticesInRow = bindSide == BindSide.Right ? firstGrid.rows : firstGrid.cols;
 
-        // Связывание проходит по всем локальным сеткам
-        for (int y = 0; y < _rows; y++)
-            for (int x = 0; x < _cols; x++)
+        for (int i = 0; i < verticesInRow; i++)
+        {
+            // Первая вершина
+            int firstGridVertexId; 
+
+            if (bindSide == BindSide.Right) // У первой сетки берутся правые вершины
+                firstGridVertexId = firstGrid.cols - 1 + i * firstGrid.cols;
+
+            // У первой сетки берутся нижние вершины
+            else firstGridVertexId = firstGrid.rows * (firstGrid.cols - 1) + i;
+
+            Vector2 firstVertexPosition = firstGrid.GetVertexPosition(firstGridVertexId);
+
+            // Вторая вершина
+            int secondGridVertexId;
+
+            if (bindSide == BindSide.Right) // У второй сетки берутся левые вершины
+                secondGridVertexId = i * firstGrid.cols;
+
+            // У второй сетки берутся верхние вершины
+            else secondGridVertexId = i;
+
+            Vector2 secondVertexPosition = firstGrid.GetVertexPosition(secondGridVertexId);
+
+            bool hasTransition =
+                firstGrid.graph.GetEdges(firstGridVertexId).Count > 0
+                && secondGrid.graph.GetEdges(secondGridVertexId).Count > 0;
+
+            // Цепочка проходов не прерывается
+            if (hasTransition) transitions.Add(new Vector2(firstVertexPosition.x,
+                (firstVertexPosition.y + secondVertexPosition.y) / 2f));
+
+            // Цепочка проходов прервана
+            else if (transitions.Count > 0)
             {
-                // Связывание по нижнему краю
-                if (y != _rows - 1)
-                {
-                    var downVertices = _localGrids[y * _cols + x].MakeTransitions
-                    (_localGrids[(y + 1) * _cols + x], LocalGrid.TransitSide.Down);
-
-                    _transitVertices.AddRange(downVertices);
-                }
-                // Связывание по правому краю
-                if (x != _cols - 1)
-                {
-                    var rightVertices = _localGrids[y * _cols + x].MakeTransitions
-                    (_localGrids[y * _cols + x + 1], LocalGrid.TransitSide.Right);
-
-                    _transitVertices.AddRange(rightVertices);
-                }
+                // Добавляем новый узел - середину прохода
+                Vector2 middlePosition = (transitions[0] + transitions[transitions.Count - 1]) / 2f;
+                bindingNodes.Add(middlePosition);
+                transitions.Clear();
             }
-        */
+        }
 
+        if (transitions.Count > 0)
+        {
+            // Добавляем новый узел - середину прохода
+            Vector2 middlePosition = (transitions[0] + transitions[transitions.Count - 1]) / 2f;
+            bindingNodes.Add(middlePosition);
+            transitions.Clear();
+        }
+
+        return bindingNodes;
     }
 
 

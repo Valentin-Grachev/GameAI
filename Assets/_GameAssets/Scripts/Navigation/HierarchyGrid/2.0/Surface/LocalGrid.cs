@@ -10,22 +10,23 @@ public class LocalGrid
     private Vector2 _startPosition, _size;
     private float _edgeSize;
 
-    private int _rows, _cols;
+    private int _rows; public int rows => _rows;
+    private int _cols; public int cols => _cols;
 
-    public LocalGrid(Graph graph, Vector2 startPosition, Vector2 size, int density)
+    public LocalGrid(Graph graph, Vector2 startPosition, Vector2 size, float density)
     {
         SetStartParameters(startPosition, size, density);
         _graph = graph;
     }
 
 
-    public LocalGrid(Vector2 startPosition, Vector2 size, int density)
+    public LocalGrid(Vector2 startPosition, Vector2 size, float density, Collider2D[] obstacles = null)
     {
         SetStartParameters(startPosition, size, density);
-        _graph = GenerateGraph(_rows, _cols);
+        _graph = GenerateGraph(_rows, _cols, obstacles);
     }
 
-    private void SetStartParameters(Vector2 startPosition, Vector2 size, int density)
+    private void SetStartParameters(Vector2 startPosition, Vector2 size, float density)
     {
         Binding.SplitArea(size, density, out _edgeSize, out _rows, out _cols);
         _size = size;
@@ -33,7 +34,7 @@ public class LocalGrid
     }
 
 
-    private Graph GenerateGraph(int rows, int cols)
+    private Graph GenerateGraph(int rows, int cols, Collider2D[] obstacles)
     {
         Graph grid = new Graph(rows * cols);
 
@@ -50,6 +51,21 @@ public class LocalGrid
                     grid.CreateEdge(vertexId, (ushort)(vertexId + cols), weight: 1);
             }
         }
+
+        foreach (var obstacle in obstacles)
+        {
+            for (int vertexId = 0; vertexId < grid.vertexQuantity; vertexId++)
+            {
+                if (obstacle.OverlapPoint(GetVertexPosition(vertexId)))
+                {
+                    var edges = new List<Edge>(grid.GetEdges(vertexId));
+
+                    foreach (var edge in edges)
+                        grid.RemoveEdge(vertexId, edge.toVertexId);
+                }
+            }
+        }
+
 
         return grid;
     }
