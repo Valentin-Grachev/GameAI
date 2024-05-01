@@ -269,6 +269,37 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -1.5350816}
       - {x: 6.863298, y: -1.3764901}
+--- !u!1 &839022895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 839022896}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &839022896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839022895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.99, y: -5.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1003014683
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,9 +526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d81b11de58b7824bb0ee48e50ab7111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 17, y: 16}
+  _size: {x: 17.73, y: 13.13}
   _surfaceDensity: 2
-  _localGridDensity: 71.2
+  _localGridDensity: 20
   _obstacles:
   - {fileID: 1444452142}
   - {fileID: 1003014685}

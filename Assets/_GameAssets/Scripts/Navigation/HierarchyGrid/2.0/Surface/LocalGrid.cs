@@ -114,5 +114,16 @@ public class LocalGrid
             _graph.RemoveEdge(vertexId, edge.toVertexId);
     }
 
+    public bool Overlap(Vector2 position)
+    {
+        float eps = 0.1f;
+        Vector2 startPosition = _startPosition - new Vector2(_edgeSize / 2f, -_edgeSize / 2f);
+        Vector2 gridSize = new Vector2(_edgeSize * (cols + 1), _edgeSize * (rows + 1));
+
+        return Mathf.Abs(startPosition.x - position.x) < gridSize.x + eps
+            && Mathf.Abs(startPosition.y - position.y) < gridSize.y + eps;
+    }
+
+
 
 }
