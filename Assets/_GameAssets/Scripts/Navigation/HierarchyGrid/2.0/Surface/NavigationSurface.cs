@@ -11,8 +11,7 @@ public class NavigationSurface : MonoBehaviour
 
 
     private List<LocalGrid> _localGrids;
-    private List<Node> _nodes;
-    private Graph _bindingGraph;
+    private BindingGraph _bindingGraph;
 
     private int _localGridRows, _localGridCols;
 
@@ -22,6 +21,15 @@ public class NavigationSurface : MonoBehaviour
         CreateLocalGrids();
         CreateBingingGraph();
 
+        print(_bindingGraph.graph.GetEdges(0).Count);
+        foreach (var item in _bindingGraph.graph.GetEdges(0))
+        {
+            foreach (var point in item.path.betweenPoints)
+            {
+                print(point);
+            }
+        }
+
     }
 
 
@@ -29,7 +37,7 @@ public class NavigationSurface : MonoBehaviour
     [Button(nameof(Delete))] private void Delete()
     {
         _localGrids = null;
-        _nodes = null;
+        _bindingGraph = null;
     }
 
 
@@ -73,27 +81,28 @@ public class NavigationSurface : MonoBehaviour
 
                 if (j != _localGridCols - 1)
                 {
-                    var nodes = Binding.GetNodePositions(_localGrids[localGridId],
+                    var addNodePositions = Binding.GetNodePositions(_localGrids[localGridId],
                         _localGrids[localGridId + 1], Binding.BindSide.Right);
-                    nodePositions.AddRange(nodes);
+                    nodePositions.AddRange(addNodePositions);
                 }
-                    
 
                 if (i != _localGridRows - 1)
                 {
-                    var nodes = Binding.GetNodePositions(_localGrids[localGridId],
+                    var addNodePositions = Binding.GetNodePositions(_localGrids[localGridId],
                         _localGrids[localGridId + _localGridCols], Binding.BindSide.Down);
-                    nodePositions.AddRange(nodes);
+                    nodePositions.AddRange(addNodePositions);
                 }
                     
 
             }
         }
 
-        _nodes = new List<Node>(capacity: nodePositions.Count);
+        var nodes = new List<Node>(capacity: nodePositions.Count);
 
         for (int vertexId = 0; vertexId < nodePositions.Count; vertexId++)
-            _nodes.Add(new Node(vertexId, nodePositions[vertexId]));
+            nodes.Add(new Node(vertexId, nodePositions[vertexId]));
+
+        _bindingGraph = new BindingGraph(nodes, _localGrids);
 
     }
 
@@ -109,15 +118,8 @@ public class NavigationSurface : MonoBehaviour
             foreach (var localGrid in _localGrids)
                 localGrid.DrawGizmos();
         }
-        
-        if (_nodes != null)
-        {
-            Gizmos.color = Color.green;
-            foreach (var node in _nodes)
-                Gizmos.DrawWireSphere(node.position, 0.2f);
-        }
 
-
+        _bindingGraph?.DrawGizmos();
     }
 
 

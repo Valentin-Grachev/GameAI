@@ -40,6 +40,13 @@ public class Graph
         _vertexEdges[toVertexId].edges.Add(new Edge((ushort)fromVertexId, weight));
     }
 
+    public void CreateEdge(int fromVertexId, int toVertexId, int weight, Path path)
+    {
+        _vertexEdges[fromVertexId].edges.Add(new Edge((ushort)toVertexId, weight, path));
+        _vertexEdges[toVertexId].edges.Add(new Edge((ushort)fromVertexId, weight, path));
+    }
+
+
     public void RemoveEdge(int fromVertexId, int toVertexId)
     {
         RemoveEdgeElement(fromVertexId, toVertexId);

@@ -23,8 +23,6 @@ public static class Binding
         List<Vector2> transitions = new List<Vector2>();
         int verticesInRow = bindSide == BindSide.Right ? firstGrid.rows : firstGrid.cols;
 
-        Debug.Log($"Vertices in row: {verticesInRow}");
-
         for (int i = 0; i < verticesInRow; i++)
         {
             // Первая вершина
@@ -49,18 +47,13 @@ public static class Binding
 
             Vector2 secondVertexPosition = secondGrid.GetVertexPosition(secondGridVertexId);
 
-            Debug.Log($"First: {firstGridVertexId}, second: {secondGridVertexId}");
             bool hasTransition =
                 firstGrid.graph.GetEdges(firstGridVertexId).Count > 0
                 && secondGrid.graph.GetEdges(secondGridVertexId).Count > 0;
 
             // Цепочка проходов не прерывается
             if (hasTransition)
-            {
                 transitions.Add((firstVertexPosition + secondVertexPosition) / 2f);
-                Debug.Log($"first: {firstVertexPosition} second: {secondVertexPosition}");
-                Debug.Log((firstVertexPosition + secondVertexPosition) / 2f);
-            }
                 
 
             

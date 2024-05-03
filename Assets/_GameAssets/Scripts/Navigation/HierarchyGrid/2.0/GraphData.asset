@@ -12,748 +12,350 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e646cd1df2870949a0d0cce1eee5fb6, type: 3}
   m_Name: GraphData
   m_EditorClassIdentifier: 
+  _vertexQuantity: 25
   _vertexEdges:
   - edges:
     - toVertexId: 1
       weight: 1
-    - toVertexId: 10
+      path:
+        betweenPoints: []
+    - toVertexId: 5
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 0
       weight: 1
+      path:
+        betweenPoints: []
     - toVertexId: 2
       weight: 1
-    - toVertexId: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 6
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 1
       weight: 1
+      path:
+        betweenPoints: []
     - toVertexId: 3
       weight: 1
-    - toVertexId: 12
+      path:
+        betweenPoints: []
+    - toVertexId: 7
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 2
       weight: 1
+      path:
+        betweenPoints: []
     - toVertexId: 4
       weight: 1
-    - toVertexId: 13
+      path:
+        betweenPoints: []
+    - toVertexId: 8
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 3
       weight: 1
-    - toVertexId: 14
+      path:
+        betweenPoints: []
+    - toVertexId: 9
       weight: 1
-  - edges: []
-  - edges: []
-  - edges: []
-  - edges: []
-  - edges:
-    - toVertexId: 19
-      weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 0
       weight: 1
-    - toVertexId: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 6
       weight: 1
-    - toVertexId: 20
+      path:
+        betweenPoints: []
+    - toVertexId: 10
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 1
       weight: 1
-    - toVertexId: 10
+      path:
+        betweenPoints: []
+    - toVertexId: 5
       weight: 1
-    - toVertexId: 12
+      path:
+        betweenPoints: []
+    - toVertexId: 7
       weight: 1
-    - toVertexId: 21
+      path:
+        betweenPoints: []
+    - toVertexId: 11
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 2
       weight: 1
-    - toVertexId: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 6
       weight: 1
-    - toVertexId: 13
+      path:
+        betweenPoints: []
+    - toVertexId: 8
       weight: 1
-    - toVertexId: 22
+      path:
+        betweenPoints: []
+    - toVertexId: 12
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 3
       weight: 1
-    - toVertexId: 12
+      path:
+        betweenPoints: []
+    - toVertexId: 7
       weight: 1
-    - toVertexId: 14
+      path:
+        betweenPoints: []
+    - toVertexId: 9
       weight: 1
-    - toVertexId: 23
+      path:
+        betweenPoints: []
+    - toVertexId: 13
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 4
       weight: 1
-    - toVertexId: 13
+      path:
+        betweenPoints: []
+    - toVertexId: 8
       weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 1
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 5
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 11
+      weight: 1
+      path:
+        betweenPoints: []
     - toVertexId: 15
       weight: 1
-    - toVertexId: 24
-      weight: 1
+      path:
+        betweenPoints: []
   - edges:
+    - toVertexId: 6
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 10
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 12
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 16
+      weight: 1
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 7
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 11
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 13
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 17
+      weight: 1
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 8
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 12
+      weight: 1
+      path:
+        betweenPoints: []
     - toVertexId: 14
       weight: 1
-    - toVertexId: 25
+      path:
+        betweenPoints: []
+    - toVertexId: 18
       weight: 1
-  - edges: []
-  - edges: []
-  - edges: []
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 9
       weight: 1
-    - toVertexId: 29
+      path:
+        betweenPoints: []
+    - toVertexId: 13
       weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 19
+      weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 10
       weight: 1
-    - toVertexId: 21
+      path:
+        betweenPoints: []
+    - toVertexId: 16
       weight: 1
-    - toVertexId: 30
+      path:
+        betweenPoints: []
+    - toVertexId: 20
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 11
       weight: 1
-    - toVertexId: 20
+      path:
+        betweenPoints: []
+    - toVertexId: 15
       weight: 1
-    - toVertexId: 22
+      path:
+        betweenPoints: []
+    - toVertexId: 17
       weight: 1
-    - toVertexId: 31
+      path:
+        betweenPoints: []
+    - toVertexId: 21
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 12
       weight: 1
-    - toVertexId: 21
+      path:
+        betweenPoints: []
+    - toVertexId: 16
       weight: 1
-    - toVertexId: 23
+      path:
+        betweenPoints: []
+    - toVertexId: 18
       weight: 1
-    - toVertexId: 32
+      path:
+        betweenPoints: []
+    - toVertexId: 22
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 13
       weight: 1
-    - toVertexId: 22
+      path:
+        betweenPoints: []
+    - toVertexId: 17
       weight: 1
-    - toVertexId: 24
+      path:
+        betweenPoints: []
+    - toVertexId: 19
       weight: 1
-    - toVertexId: 33
+      path:
+        betweenPoints: []
+    - toVertexId: 23
       weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 14
       weight: 1
-    - toVertexId: 23
+      path:
+        betweenPoints: []
+    - toVertexId: 18
       weight: 1
-    - toVertexId: 25
+      path:
+        betweenPoints: []
+    - toVertexId: 24
       weight: 1
-    - toVertexId: 34
-      weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 15
       weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 21
+      weight: 1
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 16
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 20
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 22
+      weight: 1
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 17
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 21
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 23
+      weight: 1
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 18
+      weight: 1
+      path:
+        betweenPoints: []
+    - toVertexId: 22
+      weight: 1
+      path:
+        betweenPoints: []
     - toVertexId: 24
       weight: 1
-    - toVertexId: 26
-      weight: 1
-    - toVertexId: 35
-      weight: 1
-  - edges:
-    - toVertexId: 25
-      weight: 1
-    - toVertexId: 36
-      weight: 1
-  - edges: []
-  - edges:
-    - toVertexId: 29
-      weight: 1
-    - toVertexId: 38
-      weight: 1
+      path:
+        betweenPoints: []
   - edges:
     - toVertexId: 19
       weight: 1
-    - toVertexId: 28
-      weight: 1
-    - toVertexId: 39
-      weight: 1
-  - edges:
-    - toVertexId: 20
-      weight: 1
-    - toVertexId: 31
-      weight: 1
-    - toVertexId: 40
-      weight: 1
-  - edges:
-    - toVertexId: 21
-      weight: 1
-    - toVertexId: 30
-      weight: 1
-    - toVertexId: 32
-      weight: 1
-    - toVertexId: 41
-      weight: 1
-  - edges:
-    - toVertexId: 22
-      weight: 1
-    - toVertexId: 31
-      weight: 1
-    - toVertexId: 33
-      weight: 1
-    - toVertexId: 42
-      weight: 1
-  - edges:
+      path:
+        betweenPoints: []
     - toVertexId: 23
       weight: 1
-    - toVertexId: 32
-      weight: 1
-    - toVertexId: 34
-      weight: 1
-    - toVertexId: 43
-      weight: 1
-  - edges:
-    - toVertexId: 24
-      weight: 1
-    - toVertexId: 33
-      weight: 1
-    - toVertexId: 35
-      weight: 1
-    - toVertexId: 44
-      weight: 1
-  - edges:
-    - toVertexId: 25
-      weight: 1
-    - toVertexId: 34
-      weight: 1
-    - toVertexId: 36
-      weight: 1
-    - toVertexId: 45
-      weight: 1
-  - edges:
-    - toVertexId: 26
-      weight: 1
-    - toVertexId: 35
-      weight: 1
-    - toVertexId: 37
-      weight: 1
-    - toVertexId: 46
-      weight: 1
-  - edges:
-    - toVertexId: 36
-      weight: 1
-    - toVertexId: 38
-      weight: 1
-    - toVertexId: 47
-      weight: 1
-  - edges:
-    - toVertexId: 28
-      weight: 1
-    - toVertexId: 37
-      weight: 1
-    - toVertexId: 39
-      weight: 1
-    - toVertexId: 48
-      weight: 1
-  - edges:
-    - toVertexId: 29
-      weight: 1
-    - toVertexId: 38
-      weight: 1
-    - toVertexId: 49
-      weight: 1
-  - edges:
-    - toVertexId: 30
-      weight: 1
-    - toVertexId: 41
-      weight: 1
-    - toVertexId: 50
-      weight: 1
-  - edges:
-    - toVertexId: 31
-      weight: 1
-    - toVertexId: 40
-      weight: 1
-    - toVertexId: 42
-      weight: 1
-    - toVertexId: 51
-      weight: 1
-  - edges:
-    - toVertexId: 32
-      weight: 1
-    - toVertexId: 41
-      weight: 1
-    - toVertexId: 43
-      weight: 1
-    - toVertexId: 52
-      weight: 1
-  - edges:
-    - toVertexId: 33
-      weight: 1
-    - toVertexId: 42
-      weight: 1
-    - toVertexId: 44
-      weight: 1
-    - toVertexId: 53
-      weight: 1
-  - edges:
-    - toVertexId: 34
-      weight: 1
-    - toVertexId: 43
-      weight: 1
-    - toVertexId: 45
-      weight: 1
-    - toVertexId: 54
-      weight: 1
-  - edges:
-    - toVertexId: 35
-      weight: 1
-    - toVertexId: 44
-      weight: 1
-    - toVertexId: 46
-      weight: 1
-    - toVertexId: 55
-      weight: 1
-  - edges:
-    - toVertexId: 36
-      weight: 1
-    - toVertexId: 45
-      weight: 1
-    - toVertexId: 47
-      weight: 1
-    - toVertexId: 56
-      weight: 1
-  - edges:
-    - toVertexId: 37
-      weight: 1
-    - toVertexId: 46
-      weight: 1
-    - toVertexId: 48
-      weight: 1
-    - toVertexId: 57
-      weight: 1
-  - edges:
-    - toVertexId: 38
-      weight: 1
-    - toVertexId: 47
-      weight: 1
-    - toVertexId: 49
-      weight: 1
-    - toVertexId: 58
-      weight: 1
-  - edges:
-    - toVertexId: 39
-      weight: 1
-    - toVertexId: 48
-      weight: 1
-    - toVertexId: 59
-      weight: 1
-  - edges:
-    - toVertexId: 40
-      weight: 1
-    - toVertexId: 51
-      weight: 1
-    - toVertexId: 60
-      weight: 1
-  - edges:
-    - toVertexId: 41
-      weight: 1
-    - toVertexId: 50
-      weight: 1
-    - toVertexId: 52
-      weight: 1
-    - toVertexId: 61
-      weight: 1
-  - edges:
-    - toVertexId: 42
-      weight: 1
-    - toVertexId: 51
-      weight: 1
-    - toVertexId: 53
-      weight: 1
-    - toVertexId: 62
-      weight: 1
-  - edges:
-    - toVertexId: 43
-      weight: 1
-    - toVertexId: 52
-      weight: 1
-    - toVertexId: 54
-      weight: 1
-    - toVertexId: 63
-      weight: 1
-  - edges:
-    - toVertexId: 44
-      weight: 1
-    - toVertexId: 53
-      weight: 1
-    - toVertexId: 55
-      weight: 1
-    - toVertexId: 64
-      weight: 1
-  - edges:
-    - toVertexId: 45
-      weight: 1
-    - toVertexId: 54
-      weight: 1
-    - toVertexId: 56
-      weight: 1
-    - toVertexId: 65
-      weight: 1
-  - edges:
-    - toVertexId: 46
-      weight: 1
-    - toVertexId: 55
-      weight: 1
-    - toVertexId: 57
-      weight: 1
-    - toVertexId: 66
-      weight: 1
-  - edges:
-    - toVertexId: 47
-      weight: 1
-    - toVertexId: 56
-      weight: 1
-    - toVertexId: 58
-      weight: 1
-    - toVertexId: 67
-      weight: 1
-  - edges:
-    - toVertexId: 48
-      weight: 1
-    - toVertexId: 57
-      weight: 1
-    - toVertexId: 59
-      weight: 1
-    - toVertexId: 68
-      weight: 1
-  - edges:
-    - toVertexId: 49
-      weight: 1
-    - toVertexId: 58
-      weight: 1
-    - toVertexId: 69
-      weight: 1
-  - edges:
-    - toVertexId: 50
-      weight: 1
-    - toVertexId: 61
-      weight: 1
-    - toVertexId: 70
-      weight: 1
-  - edges:
-    - toVertexId: 51
-      weight: 1
-    - toVertexId: 60
-      weight: 1
-    - toVertexId: 62
-      weight: 1
-    - toVertexId: 71
-      weight: 1
-  - edges:
-    - toVertexId: 52
-      weight: 1
-    - toVertexId: 61
-      weight: 1
-    - toVertexId: 63
-      weight: 1
-    - toVertexId: 72
-      weight: 1
-  - edges:
-    - toVertexId: 53
-      weight: 1
-    - toVertexId: 62
-      weight: 1
-    - toVertexId: 64
-      weight: 1
-    - toVertexId: 73
-      weight: 1
-  - edges:
-    - toVertexId: 54
-      weight: 1
-    - toVertexId: 63
-      weight: 1
-    - toVertexId: 65
-      weight: 1
-    - toVertexId: 74
-      weight: 1
-  - edges:
-    - toVertexId: 55
-      weight: 1
-    - toVertexId: 64
-      weight: 1
-    - toVertexId: 66
-      weight: 1
-    - toVertexId: 75
-      weight: 1
-  - edges:
-    - toVertexId: 56
-      weight: 1
-    - toVertexId: 65
-      weight: 1
-    - toVertexId: 67
-      weight: 1
-    - toVertexId: 76
-      weight: 1
-  - edges:
-    - toVertexId: 57
-      weight: 1
-    - toVertexId: 66
-      weight: 1
-    - toVertexId: 68
-      weight: 1
-    - toVertexId: 77
-      weight: 1
-  - edges:
-    - toVertexId: 58
-      weight: 1
-    - toVertexId: 67
-      weight: 1
-    - toVertexId: 69
-      weight: 1
-    - toVertexId: 78
-      weight: 1
-  - edges:
-    - toVertexId: 59
-      weight: 1
-    - toVertexId: 68
-      weight: 1
-    - toVertexId: 79
-      weight: 1
-  - edges:
-    - toVertexId: 60
-      weight: 1
-    - toVertexId: 71
-      weight: 1
-    - toVertexId: 80
-      weight: 1
-  - edges:
-    - toVertexId: 61
-      weight: 1
-    - toVertexId: 70
-      weight: 1
-    - toVertexId: 72
-      weight: 1
-    - toVertexId: 81
-      weight: 1
-  - edges:
-    - toVertexId: 62
-      weight: 1
-    - toVertexId: 71
-      weight: 1
-    - toVertexId: 73
-      weight: 1
-    - toVertexId: 82
-      weight: 1
-  - edges:
-    - toVertexId: 63
-      weight: 1
-    - toVertexId: 72
-      weight: 1
-    - toVertexId: 74
-      weight: 1
-    - toVertexId: 83
-      weight: 1
-  - edges:
-    - toVertexId: 64
-      weight: 1
-    - toVertexId: 73
-      weight: 1
-    - toVertexId: 75
-      weight: 1
-    - toVertexId: 84
-      weight: 1
-  - edges:
-    - toVertexId: 65
-      weight: 1
-    - toVertexId: 74
-      weight: 1
-    - toVertexId: 76
-      weight: 1
-    - toVertexId: 85
-      weight: 1
-  - edges:
-    - toVertexId: 66
-      weight: 1
-    - toVertexId: 75
-      weight: 1
-    - toVertexId: 77
-      weight: 1
-    - toVertexId: 86
-      weight: 1
-  - edges:
-    - toVertexId: 67
-      weight: 1
-    - toVertexId: 76
-      weight: 1
-    - toVertexId: 78
-      weight: 1
-    - toVertexId: 87
-      weight: 1
-  - edges:
-    - toVertexId: 68
-      weight: 1
-    - toVertexId: 77
-      weight: 1
-    - toVertexId: 79
-      weight: 1
-    - toVertexId: 88
-      weight: 1
-  - edges:
-    - toVertexId: 69
-      weight: 1
-    - toVertexId: 78
-      weight: 1
-    - toVertexId: 89
-      weight: 1
-  - edges:
-    - toVertexId: 70
-      weight: 1
-    - toVertexId: 81
-      weight: 1
-    - toVertexId: 90
-      weight: 1
-  - edges:
-    - toVertexId: 71
-      weight: 1
-    - toVertexId: 80
-      weight: 1
-    - toVertexId: 82
-      weight: 1
-    - toVertexId: 91
-      weight: 1
-  - edges:
-    - toVertexId: 72
-      weight: 1
-    - toVertexId: 81
-      weight: 1
-    - toVertexId: 83
-      weight: 1
-    - toVertexId: 92
-      weight: 1
-  - edges:
-    - toVertexId: 73
-      weight: 1
-    - toVertexId: 82
-      weight: 1
-    - toVertexId: 84
-      weight: 1
-    - toVertexId: 93
-      weight: 1
-  - edges:
-    - toVertexId: 74
-      weight: 1
-    - toVertexId: 83
-      weight: 1
-    - toVertexId: 85
-      weight: 1
-    - toVertexId: 94
-      weight: 1
-  - edges:
-    - toVertexId: 75
-      weight: 1
-    - toVertexId: 84
-      weight: 1
-    - toVertexId: 86
-      weight: 1
-    - toVertexId: 95
-      weight: 1
-  - edges:
-    - toVertexId: 76
-      weight: 1
-    - toVertexId: 85
-      weight: 1
-    - toVertexId: 87
-      weight: 1
-    - toVertexId: 96
-      weight: 1
-  - edges:
-    - toVertexId: 77
-      weight: 1
-    - toVertexId: 86
-      weight: 1
-    - toVertexId: 88
-      weight: 1
-    - toVertexId: 97
-      weight: 1
-  - edges:
-    - toVertexId: 78
-      weight: 1
-    - toVertexId: 87
-      weight: 1
-    - toVertexId: 89
-      weight: 1
-    - toVertexId: 98
-      weight: 1
-  - edges:
-    - toVertexId: 79
-      weight: 1
-    - toVertexId: 88
-      weight: 1
-    - toVertexId: 99
-      weight: 1
-  - edges:
-    - toVertexId: 80
-      weight: 1
-    - toVertexId: 91
-      weight: 1
-  - edges:
-    - toVertexId: 81
-      weight: 1
-    - toVertexId: 90
-      weight: 1
-    - toVertexId: 92
-      weight: 1
-  - edges:
-    - toVertexId: 82
-      weight: 1
-    - toVertexId: 91
-      weight: 1
-    - toVertexId: 93
-      weight: 1
-  - edges:
-    - toVertexId: 83
-      weight: 1
-    - toVertexId: 92
-      weight: 1
-    - toVertexId: 94
-      weight: 1
-  - edges:
-    - toVertexId: 84
-      weight: 1
-    - toVertexId: 93
-      weight: 1
-    - toVertexId: 95
-      weight: 1
-  - edges:
-    - toVertexId: 85
-      weight: 1
-    - toVertexId: 94
-      weight: 1
-    - toVertexId: 96
-      weight: 1
-  - edges:
-    - toVertexId: 86
-      weight: 1
-    - toVertexId: 95
-      weight: 1
-    - toVertexId: 97
-      weight: 1
-  - edges:
-    - toVertexId: 87
-      weight: 1
-    - toVertexId: 96
-      weight: 1
-    - toVertexId: 98
-      weight: 1
-  - edges:
-    - toVertexId: 88
-      weight: 1
-    - toVertexId: 97
-      weight: 1
-    - toVertexId: 99
-      weight: 1
-  - edges:
-    - toVertexId: 89
-      weight: 1
-    - toVertexId: 98
-      weight: 1
+      path:
+        betweenPoints: []

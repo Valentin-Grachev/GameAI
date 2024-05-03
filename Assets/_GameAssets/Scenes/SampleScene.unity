@@ -348,6 +348,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.86
+--- !u!1 &1205972583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1205972584}
+  m_Layer: 0
+  m_Name: Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1205972584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205972583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.21, y: -2.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1605526166}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1330351744
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,18 +500,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3772a95f8180449a85bd283fe0e8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridSize: {x: 16.4, y: 11.1}
-  _density: 20
-  _removeVertexIds: 000000000100000003000000050000001100000017000000
+  _checkPosition: {fileID: 1205972584}
+  _gridSize: {x: 13, y: 8}
+  _density: 10
   _fromVertexId: 0
-  _toVertexId: 33
+  _toVertexId: 17
   _graphData: {fileID: 11400000, guid: c7bff48308f96fa41bd00e82919ff884, type: 2}
   _gridGraph:
-    rid: 2233662886116327444
+    rid: 6971349096178384905
   references:
     version: 2
     RefIds:
-    - rid: 2233662886116327444
+    - rid: 6971349096178384905
       type: {class: LocalGrid, ns: , asm: Assembly-CSharp}
 --- !u!4 &1605526166
 Transform:
@@ -490,10 +521,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605526164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.68, y: 6.23, z: 0}
+  m_LocalPosition: {x: 14, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1205972584}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -541,7 +573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139084145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0.55, z: 0}
+  m_LocalPosition: {x: -0.4, y: 0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

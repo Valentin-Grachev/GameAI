@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GraphData", fileName = "GraphData")]
 public class GraphData : ScriptableObject
 {
+    [SerializeField] private int _vertexQuantity;
     [SerializeField] private EdgeList[] _vertexEdges;
 
     public Graph GetGraph() => new Graph(_vertexEdges);
@@ -18,7 +19,7 @@ public class GraphData : ScriptableObject
         for (int vertexId = 0; vertexId < graph.vertexQuantity; vertexId++)
             _vertexEdges[vertexId].edges = new List<Edge>(graph.GetEdges(vertexId));
 
-        //UnityEditor.EditorUtility.sav
+        _vertexQuantity = graph.vertexQuantity;
     }
 
 

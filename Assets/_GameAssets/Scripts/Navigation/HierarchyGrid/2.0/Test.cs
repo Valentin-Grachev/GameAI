@@ -4,55 +4,53 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour
 {
+    [SerializeField] private Transform _checkPosition;
+    [Space(10)]
     [SerializeField] private Vector2 _gridSize;
     [SerializeField] private int _density;
-    
-    [SerializeField] private List<int> _removeVertexIds;
-    [Space(10)]
+
     [SerializeField] private int _fromVertexId;
     [SerializeField] private int _toVertexId;
     [Space(10)]
     [SerializeField] private GraphData _graphData;
 
     [SerializeReference] private LocalGrid _gridGraph;
-    private List<ushort> _path;
+    private List<int> _path;
 
 
-    [Button(nameof(Generate))]
-    private void Generate()
+    [Button(nameof(Generate))] private void Generate()
     {
         _gridGraph = new LocalGrid(transform.position, _gridSize, _density);
-        foreach (var item in _removeVertexIds)
-            _gridGraph.RemoveVertex(item);
     }
 
-    [Button(nameof(SaveData))]
-    private void SaveData()
+    [Button(nameof(SaveData))] private void SaveData()
     {
         _graphData.SaveGraph(_gridGraph.graph);
     }
 
-    [Button(nameof(LoadData))]
-    private void LoadData()
+    [Button(nameof(LoadData))] private void LoadData()
     {
-        //_gridGraph = new LocalGrid(_graphData.GetGraph(), transform.position, _density, _gridSize);
+        _gridGraph = new LocalGrid(_graphData.GetGraph(), transform.position, _gridSize, _density);
     }
 
 
 
-    [Button(nameof(Path))]
-    private void Path()
+    [Button(nameof(Path))] private void Path()
     {
-        _gridGraph.graph.FindPathDijkstra((ushort)_fromVertexId, (ushort)_toVertexId, out _path);
+        _gridGraph.graph.FindPathDijkstra(_fromVertexId, _toVertexId, out _path, out int weight);
+        print(weight);
     }
 
-    [Button(nameof(Clear))]
-    private void Clear()
+    [Button(nameof(Clear))] private void Clear()
     {
         _path = null;
         _gridGraph = null;
     }
+    [Button(nameof(Check))] private void Check()
+    {
+        print(_gridGraph.GetVertexId(_checkPosition.transform.position));
 
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -71,7 +69,7 @@ public class Test : MonoBehaviour
             foreach (var vertexId in _path)
             {
                 Vector2 vertexPosition = _gridGraph.GetVertexPosition(vertexId);
-                Gizmos.DrawWireSphere(vertexPosition, _density / 2f);
+                Gizmos.DrawWireSphere(vertexPosition, 0.5f);
             }
                 
 

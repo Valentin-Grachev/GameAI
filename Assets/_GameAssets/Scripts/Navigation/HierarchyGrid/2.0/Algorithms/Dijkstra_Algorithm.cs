@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public static class Dijkstra_Algorithm
 {
     const ushort infinity = ushort.MaxValue;
 
-    public static bool FindPathDijkstra(this Graph graph, ushort startVertexId,
-            ushort finishVertexId, out List<ushort> path)
+    public static bool FindPathDijkstra(this Graph graph, int startVertexId,
+            int finishVertexId, out List<int> idPath, out int weight)
     {
-        path = null;
+        idPath = null;
+        weight = 0;
 
         // Шаг 0:
 
@@ -24,7 +26,7 @@ public static class Dijkstra_Algorithm
         ushort[] enterVertexIds = Enumerable.Repeat(infinity, graph.vertexQuantity).ToArray();
 
 
-        ushort currentVertexId = startVertexId;
+        ushort currentVertexId = (ushort)startVertexId;
         hasConstMarks[startVertexId] = true;
 
         // До тех пор, пока не доберемся до финиша:
@@ -32,12 +34,10 @@ public static class Dijkstra_Algorithm
         while (currentVertexId != finishVertexId)
         {
             // Шаг 1 - Обновление меток
-
             // Идем по каждому ребру из текущей вершины
 
             foreach (var edge in graph.GetEdges(currentVertexId))
             {
-
                 // Там, куда пришли сравниваем текущую метку и
                 // метку, полученную в результате сложения веса ребра и метки вершины, откуда сюда пришли
                 ushort currentMark = vertexMarks[edge.toVertexId];
@@ -78,15 +78,18 @@ public static class Dijkstra_Algorithm
 
         // Шаг 3 - построение пути
 
-        path = new List<ushort>();
+        idPath = new List<int>();
 
+        weight = vertexMarks[currentVertexId];
         while (currentVertexId != startVertexId)
         {
-            path.Add(currentVertexId);
+            idPath.Add(currentVertexId);
             currentVertexId = enterVertexIds[currentVertexId];
         }
 
-        path.Reverse();
+        idPath.Add(startVertexId);
+        idPath.Reverse();
+
         return true;
     }
 

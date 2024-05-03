@@ -30,7 +30,7 @@ public class LocalGrid
     {
         Binding.SplitArea(size, density, out _edgeSize, out _rows, out _cols);
         _size = size;
-        _startPosition = startPosition + new Vector2(_edgeSize / 2f, -_edgeSize / 2f);
+        _startPosition = startPosition;
     }
 
 
@@ -45,26 +45,30 @@ public class LocalGrid
                 int vertexId = i * cols + j;
 
                 if (vertexId % cols < cols - 1)
-                    grid.CreateEdge(vertexId, (ushort)(vertexId + 1), weight: 1);
+                    grid.CreateEdge(vertexId, vertexId + 1, weight: 1);
 
                 if (vertexId / cols < rows - 1)
-                    grid.CreateEdge(vertexId, (ushort)(vertexId + cols), weight: 1);
+                    grid.CreateEdge(vertexId, vertexId + cols, weight: 1);
             }
         }
 
-        foreach (var obstacle in obstacles)
+        if (obstacles != null)
         {
-            for (int vertexId = 0; vertexId < grid.vertexQuantity; vertexId++)
+            foreach (var obstacle in obstacles)
             {
-                if (obstacle.OverlapPoint(GetVertexPosition(vertexId)))
+                for (int vertexId = 0; vertexId < grid.vertexQuantity; vertexId++)
                 {
-                    var edges = new List<Edge>(grid.GetEdges(vertexId));
+                    if (obstacle.OverlapPoint(GetVertexPosition(vertexId)))
+                    {
+                        var edges = new List<Edge>(grid.GetEdges(vertexId));
 
-                    foreach (var edge in edges)
-                        grid.RemoveEdge(vertexId, edge.toVertexId);
+                        foreach (var edge in edges)
+                            grid.RemoveEdge(vertexId, edge.toVertexId);
+                    }
                 }
             }
         }
+        
 
 
         return grid;
@@ -75,7 +79,19 @@ public class LocalGrid
         int x = vertexId % _cols;
         int y = vertexId / _cols;
 
-        return new Vector2(_startPosition.x + x * _edgeSize, _startPosition.y - y * _edgeSize);
+        return new Vector2(_startPosition.x + (0.5f + x) * _edgeSize,
+            _startPosition.y - (0.5f + y) * _edgeSize);
+    }
+
+    public int GetVertexId(Vector2 position)
+    {
+        int x = (int)((position.x - _startPosition.x) / _edgeSize);
+        x = Mathf.Clamp(x, 0, _cols - 1);
+
+        int y = (int)((_startPosition.y - position.y) / _edgeSize);
+        y = Mathf.Clamp(y, 0, _rows - 1);
+
+        return y * _cols + x;
     }
 
 
@@ -83,8 +99,8 @@ public class LocalGrid
     {
         Gizmos.color = Color.cyan;
 
-        Vector2 drawGridSizePosition = _startPosition + new Vector2(_size.x / 2f, -_size.y / 2f) 
-            + new Vector2(-_edgeSize / 2f, _edgeSize / 2f);
+        Vector2 drawGridSizePosition = _startPosition 
+            + new Vector2(_size.x / 2f, -_size.y / 2f);
 
         Gizmos.DrawWireCube(drawGridSizePosition, _size);
 
@@ -117,11 +133,10 @@ public class LocalGrid
     public bool Overlap(Vector2 position)
     {
         float eps = 0.1f;
-        Vector2 startPosition = _startPosition - new Vector2(_edgeSize / 2f, -_edgeSize / 2f);
         Vector2 gridSize = new Vector2(_edgeSize * (cols + 1), _edgeSize * (rows + 1));
 
-        return Mathf.Abs(startPosition.x - position.x) < gridSize.x + eps
-            && Mathf.Abs(startPosition.y - position.y) < gridSize.y + eps;
+        return Mathf.Abs(_startPosition.x - position.x) < gridSize.x + eps
+            && Mathf.Abs(_startPosition.y - position.y) < gridSize.y + eps;
     }
 
 
