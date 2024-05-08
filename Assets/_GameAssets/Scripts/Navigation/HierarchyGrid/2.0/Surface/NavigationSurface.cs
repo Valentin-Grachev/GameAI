@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NavigationSurface : MonoBehaviour
 {
+    [SerializeField] private SurfaceData _data;
+    [Space(10)]
     [SerializeField] private Vector2 _size;
     [SerializeField][Range(0.1f, 2)] private float _surfaceDensity;
     [SerializeField] [Range(1f, 100f)] private float _localGridDensity;
@@ -21,18 +23,17 @@ public class NavigationSurface : MonoBehaviour
         CreateLocalGrids();
         CreateBingingGraph();
 
-        print(_bindingGraph.graph.GetEdges(0).Count);
-        foreach (var item in _bindingGraph.graph.GetEdges(0))
-        {
-            foreach (var point in item.path.betweenPoints)
-            {
-                print(point);
-            }
-        }
-
     }
 
+    [Button(nameof(LoadSurface))] private void LoadSurface()
+    {
+        _bindingGraph = _data.Load();
+    }
 
+    [Button(nameof(SaveSurface))] private void SaveSurface()
+    {
+        _data.Save(_bindingGraph);
+    }
 
     [Button(nameof(Delete))] private void Delete()
     {
@@ -45,7 +46,7 @@ public class NavigationSurface : MonoBehaviour
     private void CreateLocalGrids()
     {
         Vector2 startPosition = (Vector2)transform.position + new Vector2(-_size.x / 2f, _size.y / 2f);
-        Binding.SplitArea(_size, _surfaceDensity,
+        Utils.SplitArea(_size, _surfaceDensity,
             out float localGridSize, out _localGridRows, out _localGridCols);
 
         _localGrids = new List<LocalGrid>();
@@ -81,15 +82,15 @@ public class NavigationSurface : MonoBehaviour
 
                 if (j != _localGridCols - 1)
                 {
-                    var addNodePositions = Binding.GetNodePositions(_localGrids[localGridId],
-                        _localGrids[localGridId + 1], Binding.BindSide.Right);
+                    var addNodePositions = BindingGraph.GetNodePositions(_localGrids[localGridId],
+                        _localGrids[localGridId + 1], BindingGraph.BindSide.Right);
                     nodePositions.AddRange(addNodePositions);
                 }
 
                 if (i != _localGridRows - 1)
                 {
-                    var addNodePositions = Binding.GetNodePositions(_localGrids[localGridId],
-                        _localGrids[localGridId + _localGridCols], Binding.BindSide.Down);
+                    var addNodePositions = BindingGraph.GetNodePositions(_localGrids[localGridId],
+                        _localGrids[localGridId + _localGridCols], BindingGraph.BindSide.Down);
                     nodePositions.AddRange(addNodePositions);
                 }
                     

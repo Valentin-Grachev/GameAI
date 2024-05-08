@@ -28,7 +28,7 @@ public class LocalGrid
 
     private void SetStartParameters(Vector2 startPosition, Vector2 size, float density)
     {
-        Binding.SplitArea(size, density, out _edgeSize, out _rows, out _cols);
+        Utils.SplitArea(size, density, out _edgeSize, out _rows, out _cols);
         _size = size;
         _startPosition = startPosition;
     }
@@ -135,8 +135,11 @@ public class LocalGrid
         float eps = 0.1f;
         Vector2 gridSize = new Vector2(_edgeSize * (cols + 1), _edgeSize * (rows + 1));
 
-        return Mathf.Abs(_startPosition.x - position.x) < gridSize.x + eps
-            && Mathf.Abs(_startPosition.y - position.y) < gridSize.y + eps;
+        float differenceX = position.x - _startPosition.x;
+        float differenceY = -position.y + _startPosition.y;
+
+        return -eps <= differenceX && differenceX < gridSize.x + eps 
+            && -eps <= differenceY && differenceY < gridSize.y + eps;
     }
 
 

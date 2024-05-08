@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class Dijkstra_Algorithm
+
+public static class PathFinder
 {
     const ushort infinity = ushort.MaxValue;
 
@@ -93,6 +94,32 @@ public static class Dijkstra_Algorithm
         return true;
     }
 
+
+    public static List<Vector2> GetSimplifyPath(this List<Vector2> path, Vector2 start, Vector2 finish)
+    {
+        var newBetweenPoints = new List<Vector2>();
+        if (path.Count == 0) return newBetweenPoints;
+
+        Vector2 currentPoint = start;
+        Vector2 previousPoint = path[0];
+        for (int i = 1; i <= path.Count; i++)
+        {
+            Vector2 nextPoint = i == path.Count ? finish : path[i];
+
+            Vector2 raycastDirection = (nextPoint - currentPoint).normalized;
+            bool hasIntersection = Physics2D.Raycast(currentPoint, raycastDirection, 
+                Vector2.Distance(nextPoint, currentPoint)).collider != null;
+
+            if (hasIntersection)
+            {
+                newBetweenPoints.Add(previousPoint);
+                currentPoint = previousPoint;
+            }
+            previousPoint = nextPoint;
+        }
+
+        return newBetweenPoints;
+    }
 
 
 

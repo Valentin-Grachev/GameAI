@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class BindingGraph
 {
-    private List<Node> _nodes;
+    private List<Node> _nodes; public List<Node> nodes => _nodes;
     private Graph _graph; public Graph graph => _graph; 
 
+
+    public BindingGraph(List<Vector2> nodePositions, List<EdgeList> vertexEdges)
+    {
+        _nodes = new List<Node>(nodePositions.Count);
+        for (int vertexId = 0; vertexId < nodePositions.Count; vertexId++)
+            _nodes.Add(new Node(vertexId, nodePositions[vertexId]));
+
+        _graph = new Graph(vertexEdges.ToArray());
+    }
 
     public BindingGraph(List<Node> nodes, List<LocalGrid> localGrids)
     {
@@ -20,12 +29,12 @@ public class BindingGraph
 
             BindNodeInsideGrid(currentNode, firstGrid);
             BindNodeInsideGrid(currentNode, secondGrid);
-            _nodes[i].MarkAsBuilt();
+            currentNode.pathsBuilt = true;
         }
     }
 
 
-    private void GetNodeGridPair(in Node node, List<LocalGrid> grids, 
+    private void GetNodeGridPair(Node node, List<LocalGrid> grids, 
         out LocalGrid firstGrid, out LocalGrid secondGrid)
     {
         firstGrid = null; 
@@ -47,8 +56,6 @@ public class BindingGraph
         foreach (var insideNode in insideNodes)
         {
             if (insideNode.vertexId == node.vertexId || insideNode.pathsBuilt) continue;
-            
-            Debug.Log($"Bind: {node.vertexId} => {insideNode.vertexId}");
 
             int startVertexId = grid.GetVertexId(node.position);
             int finishVertexId = grid.GetVertexId(insideNode.position);
@@ -60,8 +67,10 @@ public class BindingGraph
                 for (int vertexId = 0; vertexId < idPath.Count; vertexId++)
                     betweenPoints.Add(grid.GetVertexPosition(idPath[vertexId]));
 
-                _graph.CreateEdge(node.vertexId, insideNode.vertexId,
-                    weight, new Path(betweenPoints));
+                var path = new Path(betweenPoints.GetSimplifyPath
+                    (start: node.position, finish: insideNode.position));
+
+                _graph.CreateEdge(node.vertexId, insideNode.vertexId, weight, path);
             }
         }
     }
@@ -89,24 +98,80 @@ public class BindingGraph
             Gizmos.DrawWireSphere(node.position, 0.3f);
 
             foreach (var edge in _graph.GetEdges(node.vertexId))
-            {
-                Vector2 from = node.position;
-                Vector2 to;
-                for (int i = 0; i < edge.path.betweenPoints.Count; i++)
-                {
-                    to = edge.path.betweenPoints[i];
-                    Gizmos.DrawLine(from, to);
-                    from = to;
-                }
-                to = _nodes[edge.toVertexId].position;
-                Gizmos.DrawLine(from, to);
-            }
+                edge.path.DrawGizmos(node.position, _nodes[edge.toVertexId].position);
 
         }
 
 
     }
 
+
+    public enum BindSide { Right, Down }
+    public static List<Vector2> GetNodePositions(LocalGrid firstGrid, LocalGrid secondGrid, BindSide bindSide)
+    {
+        var bindingNodes = new List<Vector2>();
+        if (secondGrid.graph.vertexQuantity == 0 || secondGrid.graph.vertexQuantity == 0)
+            return bindingNodes;
+
+        List<Vector2> transitions = new List<Vector2>();
+        int verticesInRow = bindSide == BindSide.Right ? firstGrid.rows : firstGrid.cols;
+
+        for (int i = 0; i < verticesInRow; i++)
+        {
+            // Первая вершина
+            int firstGridVertexId;
+
+            if (bindSide == BindSide.Right) // У первой сетки берутся правые вершины
+                firstGridVertexId = firstGrid.cols - 1 + i * firstGrid.cols;
+
+            // У первой сетки берутся нижние вершины
+            else firstGridVertexId = (firstGrid.rows - 1) * firstGrid.cols + i;
+
+            Vector2 firstVertexPosition = firstGrid.GetVertexPosition(firstGridVertexId);
+
+            // Вторая вершина
+            int secondGridVertexId;
+
+            if (bindSide == BindSide.Right) // У второй сетки берутся левые вершины
+                secondGridVertexId = i * secondGrid.cols;
+
+            // У второй сетки берутся верхние вершины
+            else secondGridVertexId = i;
+
+            Vector2 secondVertexPosition = secondGrid.GetVertexPosition(secondGridVertexId);
+
+            bool hasTransition =
+                firstGrid.graph.GetEdges(firstGridVertexId).Count > 0
+                && secondGrid.graph.GetEdges(secondGridVertexId).Count > 0;
+
+            // Цепочка проходов не прерывается
+            if (hasTransition)
+                transitions.Add((firstVertexPosition + secondVertexPosition) / 2f);
+
+
+
+
+            // Цепочка проходов прервана
+            else if (transitions.Count > 0)
+            {
+                // Добавляем новый узел - середину прохода
+                Vector2 middlePosition = (transitions[0] + transitions[transitions.Count - 1]) / 2f;
+                bindingNodes.Add(middlePosition);
+                transitions.Clear();
+            }
+        }
+
+        if (transitions.Count > 0)
+        {
+            // Добавляем новый узел - середину прохода
+            Vector2 middlePosition = (transitions[0] + transitions[transitions.Count - 1]) / 2f;
+
+            bindingNodes.Add(middlePosition);
+            transitions.Clear();
+        }
+
+        return bindingNodes;
+    }
 
 
 }

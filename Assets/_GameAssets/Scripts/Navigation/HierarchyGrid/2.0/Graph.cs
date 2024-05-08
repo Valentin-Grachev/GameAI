@@ -8,7 +8,7 @@ public class Graph
     
 
 
-    private EdgeList[] _vertexEdges;
+    private EdgeList[] _vertexEdges; public EdgeList[] vertexEdges => _vertexEdges;
 
     public int vertexQuantity => _vertexEdges.Length;
 
@@ -43,7 +43,7 @@ public class Graph
     public void CreateEdge(int fromVertexId, int toVertexId, int weight, Path path)
     {
         _vertexEdges[fromVertexId].edges.Add(new Edge((ushort)toVertexId, weight, path));
-        _vertexEdges[toVertexId].edges.Add(new Edge((ushort)fromVertexId, weight, path));
+        _vertexEdges[toVertexId].edges.Add(new Edge((ushort)fromVertexId, weight, path.GetReversed()));
     }
 
 

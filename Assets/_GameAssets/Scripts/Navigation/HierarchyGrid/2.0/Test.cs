@@ -12,7 +12,7 @@ public class Test : MonoBehaviour
     [SerializeField] private int _fromVertexId;
     [SerializeField] private int _toVertexId;
     [Space(10)]
-    [SerializeField] private GraphData _graphData;
+    [SerializeField] private SurfaceData _graphData;
 
     [SerializeReference] private LocalGrid _gridGraph;
     private List<int> _path;
@@ -25,12 +25,12 @@ public class Test : MonoBehaviour
 
     [Button(nameof(SaveData))] private void SaveData()
     {
-        _graphData.SaveGraph(_gridGraph.graph);
+        //_graphData.SaveGraph(_gridGraph.graph);
     }
 
     [Button(nameof(LoadData))] private void LoadData()
     {
-        _gridGraph = new LocalGrid(_graphData.GetGraph(), transform.position, _gridSize, _density);
+        //_gridGraph = new LocalGrid(_graphData.GetGraph(), transform.position, _gridSize, _density);
     }
 
 
