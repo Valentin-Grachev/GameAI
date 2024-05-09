@@ -5,36 +5,29 @@ using UnityEngine;
 [System.Serializable]
 public class LocalGrid
 {
-    private Graph _graph; public Graph graph => _graph;
+    private Graph _graph; public Graph graph => _graph; 
+    public bool generated => _graph != null;
 
     private Vector2 _startPosition, _size;
     private float _edgeSize;
+    private Collider2D[] _obstacles;
 
     private int _rows; public int rows => _rows;
     private int _cols; public int cols => _cols;
 
-    public LocalGrid(Graph graph, Vector2 startPosition, Vector2 size, float density)
-    {
-        SetStartParameters(startPosition, size, density);
-        _graph = graph;
-    }
 
-
-    public LocalGrid(Vector2 startPosition, Vector2 size, float density, Collider2D[] obstacles = null)
-    {
-        SetStartParameters(startPosition, size, density);
-        _graph = GenerateGraph(_rows, _cols, obstacles);
-    }
-
-    private void SetStartParameters(Vector2 startPosition, Vector2 size, float density)
+    public LocalGrid(Vector2 startPosition, Vector2 size, float density, Collider2D[] obstacles)
     {
         Utils.SplitArea(size, density, out _edgeSize, out _rows, out _cols);
         _size = size;
         _startPosition = startPosition;
+        _obstacles = obstacles;
     }
 
+    public void Generate() => _graph = GenerateGraph(_rows, _cols);
 
-    private Graph GenerateGraph(int rows, int cols, Collider2D[] obstacles)
+
+    private Graph GenerateGraph(int rows, int cols)
     {
         Graph grid = new Graph(rows * cols);
 
@@ -52,9 +45,9 @@ public class LocalGrid
             }
         }
 
-        if (obstacles != null)
+        if (_obstacles != null)
         {
-            foreach (var obstacle in obstacles)
+            foreach (var obstacle in _obstacles)
             {
                 for (int vertexId = 0; vertexId < grid.vertexQuantity; vertexId++)
                 {
@@ -83,16 +76,8 @@ public class LocalGrid
             _startPosition.y - (0.5f + y) * _edgeSize);
     }
 
-    public int GetVertexId(Vector2 position)
-    {
-        int x = (int)((position.x - _startPosition.x) / _edgeSize);
-        x = Mathf.Clamp(x, 0, _cols - 1);
-
-        int y = (int)((_startPosition.y - position.y) / _edgeSize);
-        y = Mathf.Clamp(y, 0, _rows - 1);
-
-        return y * _cols + x;
-    }
+    public int GetVertexId(Vector2 position) =>
+        PathFinder.GetGridIndexByPosition(position, _startPosition, _rows, _cols, _edgeSize);
 
 
     public void DrawGizmos()
@@ -104,8 +89,9 @@ public class LocalGrid
 
         Gizmos.DrawWireCube(drawGridSizePosition, _size);
 
-        Gizmos.color = Color.blue;
+        if (!generated) return;
 
+        Gizmos.color = Color.blue;
         for (int vertexId = 0; vertexId < _graph.vertexQuantity; vertexId++)
         {
             Vector2 vertexPosition = GetVertexPosition(vertexId);

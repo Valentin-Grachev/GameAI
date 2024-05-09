@@ -14,7 +14,7 @@ public class BindingGraph
         for (int vertexId = 0; vertexId < nodePositions.Count; vertexId++)
             _nodes.Add(new Node(vertexId, nodePositions[vertexId]));
 
-        _graph = new Graph(vertexEdges.ToArray());
+        _graph = new Graph(vertexEdges);
     }
 
     public BindingGraph(List<Node> nodes, List<LocalGrid> localGrids)
@@ -63,13 +63,7 @@ public class BindingGraph
             if (grid.graph.FindPathDijkstra(startVertexId, finishVertexId,
                 out var idPath, out int weight))
             {
-                var betweenPoints = new List<Vector2>(idPath.Count);
-                for (int vertexId = 0; vertexId < idPath.Count; vertexId++)
-                    betweenPoints.Add(grid.GetVertexPosition(idPath[vertexId]));
-
-                var path = new Path(betweenPoints.GetSimplifyPath
-                    (start: node.position, finish: insideNode.position));
-
+                var path = PathFinder.ConvertIdPath(grid, idPath, node.position, insideNode.position);
                 _graph.CreateEdge(node.vertexId, insideNode.vertexId, weight, path);
             }
         }
@@ -104,6 +98,21 @@ public class BindingGraph
 
 
     }
+
+    public Node CreateNode(Vector2 position)
+    {
+        int vertexId = _graph.CreateVertex();
+        var newNode = new Node(vertexId, position);
+        _nodes.Add(newNode);
+        return newNode;
+    }
+
+    public void DeleteLastNodes(int quantity)
+    {
+        _graph.DeleteLastVertices(quantity);
+        _nodes.RemoveRange(_nodes.Count - quantity, quantity);
+    }
+
 
 
     public enum BindSide { Right, Down }

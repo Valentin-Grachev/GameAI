@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public struct EdgeList
 {
     public List<Edge> edges;
-
-    public void Initialize() => edges = new List<Edge>();
-    public EdgeList(EdgeList copy) => edges = new List<Edge>(copy.edges);
+    public EdgeList(bool initialize) => edges = new List<Edge>();
 
 }

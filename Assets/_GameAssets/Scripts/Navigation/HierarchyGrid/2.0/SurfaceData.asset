@@ -12,5 +12,425 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ee4b181ab602746b381f5fa38cc869, type: 3}
   m_Name: SurfaceData
   m_EditorClassIdentifier: 
-  _nodePositions: []
-  _vertexEdges: []
+  startPosition: {x: -7.4999995, y: 7.425}
+  size: {x: 17.96, y: 14.39}
+  surfaceDensity: 2
+  localGridDensity: 30.1
+  nodePositions:
+  - {x: -2.508305, y: 5.4316444}
+  - {x: -6.3372087, y: 2.4333057}
+  - {x: 2.491695, y: 5.597758}
+  - {x: -0.8388699, y: 2.4333057}
+  - {x: 7.491695, y: 4.9333057}
+  - {x: 5.988373, y: 2.4333057}
+  - {x: 8.828904, y: 2.4333057}
+  - {x: -2.508305, y: -1.3955978}
+  - {x: -5.008305, y: -2.5666943}
+  - {x: 2.491695, y: -2.3922756}
+  - {x: -0.008305192, y: -2.5666943}
+  - {x: 7.491695, y: -0.06669414}
+  - {x: 4.991695, y: -2.5666943}
+  - {x: 8.828904, y: -2.5666943}
+  - {x: -2.508305, y: -2.7411127}
+  - {x: -2.508305, y: -5.731146}
+  - {x: 2.491695, y: -4.7344685}
+  - {x: 7.491695, y: -4.7344685}
+  vertexEdges:
+  - edges:
+    - toVertexId: 1
+      weight: 19
+      path:
+        betweenPoints: []
+    - toVertexId: 2
+      weight: 15
+      path:
+        betweenPoints: []
+    - toVertexId: 3
+      weight: 13
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 0
+      weight: 19
+      path:
+        betweenPoints: []
+    - toVertexId: 7
+      weight: 22
+      path:
+        betweenPoints:
+        - {x: -4.6760793, y: -0.0666942}
+    - toVertexId: 8
+      weight: 18
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 25
+      path:
+        betweenPoints:
+        - {x: -4.6760793, y: -0.0666942}
+  - edges:
+    - toVertexId: 0
+      weight: 15
+      path:
+        betweenPoints: []
+    - toVertexId: 3
+      weight: 18
+      path:
+        betweenPoints:
+        - {x: -0.67275697, y: 3.604402}
+    - toVertexId: 4
+      weight: 16
+      path:
+        betweenPoints: []
+    - toVertexId: 5
+      weight: 19
+      path:
+        betweenPoints:
+        - {x: 5.988373, y: 2.6077244}
+  - edges:
+    - toVertexId: 0
+      weight: 13
+      path:
+        betweenPoints: []
+    - toVertexId: 2
+      weight: 18
+      path:
+        betweenPoints:
+        - {x: -0.67275697, y: 3.604402}
+    - toVertexId: 7
+      weight: 16
+      path:
+        betweenPoints:
+        - {x: -1.6694348, y: 0.26553172}
+    - toVertexId: 9
+      weight: 23
+      path:
+        betweenPoints:
+        - {x: -0.34053105, y: -2.3922756}
+    - toVertexId: 10
+      weight: 16
+      path:
+        betweenPoints:
+        - {x: -0.34053105, y: -2.3922756}
+    - toVertexId: 14
+      weight: 19
+      path:
+        betweenPoints:
+        - {x: -1.6694348, y: 0.26553172}
+  - edges:
+    - toVertexId: 2
+      weight: 16
+      path:
+        betweenPoints: []
+    - toVertexId: 5
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 6
+      weight: 11
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 2
+      weight: 19
+      path:
+        betweenPoints:
+        - {x: 5.988373, y: 2.6077244}
+    - toVertexId: 4
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 9
+      weight: 24
+      path:
+        betweenPoints:
+        - {x: 4.659469, y: -2.3922756}
+    - toVertexId: 11
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 12
+      weight: 17
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 4
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 11
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 13
+      weight: 14
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 1
+      weight: 22
+      path:
+        betweenPoints:
+        - {x: -4.6760793, y: -0.0666942}
+    - toVertexId: 3
+      weight: 16
+      path:
+        betweenPoints:
+        - {x: -1.6694348, y: 0.26553172}
+    - toVertexId: 8
+      weight: 10
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 3
+      path:
+        betweenPoints: []
+    - toVertexId: 9
+      weight: 17
+      path:
+        betweenPoints:
+        - {x: 0.3239208, y: -2.3922756}
+    - toVertexId: 10
+      weight: 10
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 3
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 1
+      weight: 18
+      path:
+        betweenPoints: []
+    - toVertexId: 7
+      weight: 10
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 15
+      weight: 26
+      path:
+        betweenPoints:
+        - {x: -6.6694345, y: -3.0733387}
+        - {x: -6.6694345, y: -3.7377906}
+        - {x: -6.6694345, y: -4.0700164}
+        - {x: -6.004983, y: -5.0666943}
+  - edges:
+    - toVertexId: 3
+      weight: 23
+      path:
+        betweenPoints:
+        - {x: -0.34053105, y: -2.3922756}
+    - toVertexId: 5
+      weight: 24
+      path:
+        betweenPoints:
+        - {x: 4.659469, y: -2.3922756}
+    - toVertexId: 7
+      weight: 17
+      path:
+        betweenPoints:
+        - {x: 0.3239208, y: -2.3922756}
+    - toVertexId: 10
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 14
+      path:
+        betweenPoints: []
+    - toVertexId: 11
+      weight: 21
+      path:
+        betweenPoints:
+        - {x: 4.659469, y: -2.3922756}
+    - toVertexId: 12
+      weight: 7
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 3
+      weight: 16
+      path:
+        betweenPoints:
+        - {x: -0.34053105, y: -2.3922756}
+    - toVertexId: 7
+      weight: 10
+      path:
+        betweenPoints: []
+    - toVertexId: 9
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 14
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 15
+      weight: 24
+      path:
+        betweenPoints:
+        - {x: 1.3205986, y: -2.7411127}
+        - {x: 1.3205986, y: -3.4055645}
+    - toVertexId: 16
+      weight: 13
+      path:
+        betweenPoints:
+        - {x: 2.3172762, y: -3.4055645}
+  - edges:
+    - toVertexId: 5
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 6
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 9
+      weight: 21
+      path:
+        betweenPoints:
+        - {x: 4.659469, y: -2.3922756}
+    - toVertexId: 12
+      weight: 14
+      path:
+        betweenPoints: []
+    - toVertexId: 13
+      weight: 11
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 5
+      weight: 17
+      path:
+        betweenPoints: []
+    - toVertexId: 9
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 11
+      weight: 14
+      path:
+        betweenPoints: []
+    - toVertexId: 16
+      weight: 13
+      path:
+        betweenPoints: []
+    - toVertexId: 17
+      weight: 13
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 6
+      weight: 14
+      path:
+        betweenPoints: []
+    - toVertexId: 11
+      weight: 11
+      path:
+        betweenPoints: []
+    - toVertexId: 17
+      weight: 10
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 1
+      weight: 25
+      path:
+        betweenPoints:
+        - {x: -4.6760793, y: -0.0666942}
+    - toVertexId: 3
+      weight: 19
+      path:
+        betweenPoints:
+        - {x: -1.6694348, y: 0.26553172}
+    - toVertexId: 7
+      weight: 3
+      path:
+        betweenPoints: []
+    - toVertexId: 7
+      weight: 3
+      path:
+        betweenPoints: []
+    - toVertexId: 8
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 8
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 9
+      weight: 14
+      path:
+        betweenPoints: []
+    - toVertexId: 10
+      weight: 7
+      path:
+        betweenPoints: []
+    - toVertexId: 10
+      weight: 7
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 8
+      weight: 26
+      path:
+        betweenPoints:
+        - {x: -6.004983, y: -5.0666943}
+        - {x: -6.6694345, y: -4.0700164}
+        - {x: -6.6694345, y: -3.7377906}
+        - {x: -6.6694345, y: -3.0733387}
+    - toVertexId: 10
+      weight: 24
+      path:
+        betweenPoints:
+        - {x: 1.3205986, y: -3.4055645}
+        - {x: 1.3205986, y: -2.7411127}
+    - toVertexId: 16
+      weight: 17
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 10
+      weight: 13
+      path:
+        betweenPoints:
+        - {x: 2.3172762, y: -3.4055645}
+    - toVertexId: 12
+      weight: 13
+      path:
+        betweenPoints: []
+    - toVertexId: 15
+      weight: 17
+      path:
+        betweenPoints: []
+    - toVertexId: 17
+      weight: 14
+      path:
+        betweenPoints: []
+  - edges:
+    - toVertexId: 12
+      weight: 13
+      path:
+        betweenPoints: []
+    - toVertexId: 13
+      weight: 10
+      path:
+        betweenPoints: []
+    - toVertexId: 16
+      weight: 14
+      path:
+        betweenPoints: []

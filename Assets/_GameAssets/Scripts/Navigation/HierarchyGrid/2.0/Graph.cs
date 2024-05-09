@@ -5,32 +5,23 @@ using System.Collections.Generic;
 [Serializable]
 public class Graph
 {
-    
+    private List<EdgeList> _vertexEdges; public List<EdgeList> vertexEdges => _vertexEdges;
+
+    public int vertexQuantity => _vertexEdges.Count;
 
 
-    private EdgeList[] _vertexEdges; public EdgeList[] vertexEdges => _vertexEdges;
-
-    public int vertexQuantity => _vertexEdges.Length;
-
-
-    public Graph(Graph copy)
-    {
-        _vertexEdges = new EdgeList[copy.vertexQuantity];
-        for (int i = 0; i < vertexQuantity; i++)
-            _vertexEdges[i] = new EdgeList(copy._vertexEdges[i]);
-    }
-
-    public Graph(EdgeList[] vertexEdges) => _vertexEdges = vertexEdges;
+    public Graph(List<EdgeList> vertexEdges) => _vertexEdges = vertexEdges;
 
 
     public Graph(int vertexQuantity)
     {
         if (vertexQuantity > ushort.MaxValue) throw new Exception("Graph size is too large");
 
-        _vertexEdges = new EdgeList[vertexQuantity];
+        _vertexEdges = new List<EdgeList>(vertexQuantity);
 
         for (int i = 0; i < vertexQuantity; i++)
-            _vertexEdges[i].Initialize();
+            _vertexEdges.Add(new EdgeList(initialize: true));
+
     }
 
 
@@ -55,6 +46,26 @@ public class Graph
 
     public List<Edge> GetEdges(int vertexId) => _vertexEdges[vertexId].edges;
 
+    public int CreateVertex()
+    {
+        _vertexEdges.Add(new EdgeList(initialize: true));
+        return vertexQuantity - 1;
+    }
+    
+    public void DeleteLastVertices(int quantity)
+    {
+        for (int i = 0; i < quantity; i++)
+        {
+            int vertexId = vertexQuantity - 1;
+
+            var edges = new List<Edge>(GetEdges(vertexId));
+            for (int j = 0; j < edges.Count; j++)
+                RemoveEdge(vertexId, edges[j].toVertexId);
+
+            _vertexEdges.RemoveAt(_vertexEdges.Count - 1);
+        }
+    }
+        
 
 
 
