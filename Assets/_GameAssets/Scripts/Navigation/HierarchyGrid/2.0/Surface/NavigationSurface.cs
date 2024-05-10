@@ -9,7 +9,6 @@ public class NavigationSurface : MonoBehaviour
     [SerializeField] private Vector2 _size;
     [SerializeField][Range(0.1f, 2)] private float _surfaceDensity;
     [SerializeField] [Range(1f, 100f)] private float _localGridDensity;
-    [SerializeField] private List<Collider2D> _obstacles;
 
     private Vector2 startPosition => 
         (Vector2)transform.position + new Vector2(-_size.x / 2f, _size.y / 2f);
@@ -20,10 +19,8 @@ public class NavigationSurface : MonoBehaviour
     private int _localGridRows, _localGridCols;
     private float _localGridSize;
 
-    private void Awake()
-    {
-        LoadSurface();
-    }
+    private void Awake() => LoadSurface();
+
 
 
     [Button(nameof(Build))] public void Build()
@@ -101,6 +98,8 @@ public class NavigationSurface : MonoBehaviour
         Utils.SplitArea(_size, _surfaceDensity,
             out _localGridSize, out _localGridRows, out _localGridCols);
 
+        var obstacles = FindObjectsOfType<Obstacle>();
+
         _localGrids = new List<LocalGrid>();
         for (int i = 0; i < _localGridRows + 1; i++)
         {
@@ -110,11 +109,12 @@ public class NavigationSurface : MonoBehaviour
                 Vector2 size = Vector2.one * _localGridSize;
                 if (i == _localGridRows) size.y = _size.y - _localGridSize * _localGridRows;
                 if (j == _localGridCols) size.x = _size.x - _localGridSize * _localGridCols;
-
+                
                 var localGrid = new LocalGrid(localStartPosition, size, 
-                    _localGridDensity, _obstacles.ToArray());
-
+                    _localGridDensity, obstacles);
+                
                 _localGrids.Add(localGrid);
+                
             }
         }
 
