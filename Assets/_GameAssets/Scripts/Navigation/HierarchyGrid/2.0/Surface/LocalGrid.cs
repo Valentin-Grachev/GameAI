@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[System.Serializable]
+
 public class LocalGrid
 {
     private Graph _graph; public Graph graph => _graph; 
@@ -80,9 +80,9 @@ public class LocalGrid
         PathFinder.GetGridIndexByPosition(position, _startPosition, _rows, _cols, _edgeSize);
 
 
-    public void DrawGizmos()
+    public void DrawGizmos(Color vertexColor, Color borderColor)
     {
-        Gizmos.color = Color.cyan;
+        Gizmos.color = borderColor;
 
         Vector2 drawGridSizePosition = _startPosition 
             + new Vector2(_size.x / 2f, -_size.y / 2f);
@@ -91,7 +91,7 @@ public class LocalGrid
 
         if (!generated) return;
 
-        Gizmos.color = Color.blue;
+        Gizmos.color = vertexColor;
         for (int vertexId = 0; vertexId < _graph.vertexQuantity; vertexId++)
         {
             Vector2 vertexPosition = GetVertexPosition(vertexId);
@@ -107,13 +107,6 @@ public class LocalGrid
 
             Gizmos.DrawWireCube(vertexPosition, Vector2.one * _edgeSize / 2f);
         }
-    }
-
-    public void RemoveVertex(int vertexId)
-    {
-        var edges = new List<Edge>(_graph.GetEdges(vertexId));
-        foreach (var edge in edges)
-            _graph.RemoveEdge(vertexId, edge.toVertexId);
     }
 
     public bool Overlap(Vector2 position)

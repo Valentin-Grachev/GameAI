@@ -75,7 +75,7 @@ public class BindingGraph
         var insideNodePositions = new List<Node>();
 
         for (int i = 0; i < nodes.Count; i++)
-            if (grid.Overlap(nodes[i].position)) 
+            if (grid.Overlap(nodes[i].position))
                 insideNodePositions.Add(nodes[i]);
 
         return insideNodePositions;
@@ -83,9 +83,9 @@ public class BindingGraph
 
 
 
-    public void DrawGizmos()
+    public void DrawGizmos(Color color)
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = color;
 
         foreach (var node in _nodes)
         {

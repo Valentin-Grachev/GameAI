@@ -9,6 +9,10 @@ public class NavigationSurface : MonoBehaviour
     [SerializeField] private Vector2 _size;
     [SerializeField][Range(0.1f, 2)] private float _surfaceDensity;
     [SerializeField] [Range(1f, 100f)] private float _localGridDensity;
+    [Header("Gizmos Settings")]
+    [SerializeField] private Color _gridVertexColor;
+    [SerializeField] private Color _gridBorderColor;
+    [SerializeField] private Color _bindingGraphColor;
 
     private Vector2 startPosition => 
         (Vector2)transform.position + new Vector2(-_size.x / 2f, _size.y / 2f);
@@ -168,10 +172,10 @@ public class NavigationSurface : MonoBehaviour
         if (_localGrids != null)
         {
             foreach (var localGrid in _localGrids)
-                localGrid.DrawGizmos();
+                localGrid.DrawGizmos(_gridVertexColor, _gridBorderColor);
         }
 
-        _bindingGraph?.DrawGizmos();
+        _bindingGraph?.DrawGizmos(_bindingGraphColor);
     }
 
 

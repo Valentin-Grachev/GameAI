@@ -6,6 +6,12 @@ public class NavigationAgent : MonoBehaviour
     [SerializeField] private NavigationSurface _surface;
     [SerializeField] private float _speed;
 
+    [Header("Drawing")]
+    [SerializeField] private bool _enableDrawing;
+    [SerializeField] private LineRenderer _pathLine;
+    [SerializeField] private GameObject _startIcon;
+    [SerializeField] private GameObject _finishIcon;
+
     private List<Vector2> _currentPath;
     private int _currentPointIndex;
 
@@ -16,7 +22,26 @@ public class NavigationAgent : MonoBehaviour
     {
         enabled = _surface.BuildPath(transform.position, position, out _currentPath);
         _currentPointIndex = 0;
+
+        if (_enableDrawing) DrawPath();
+
     }
+
+    private void DrawPath()
+    {
+        _pathLine.positionCount = _currentPath.Count + 1;
+        _pathLine.SetPosition(0, transform.position);
+
+        for (int i = 0; i < _currentPath.Count; i++)
+        {
+            var point = _currentPath[i];
+            _pathLine.SetPosition(i + 1, point);
+        }
+
+        Instantiate(_startIcon, transform.position, Quaternion.identity);
+        Instantiate(_finishIcon, _currentPath[_currentPath.Count - 1], Quaternion.identity);
+    }
+
 
     private void Update() => HandleMoving();
 

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
 public class Graph
 {
     private List<EdgeList> _vertexEdges; public List<EdgeList> vertexEdges => _vertexEdges;
