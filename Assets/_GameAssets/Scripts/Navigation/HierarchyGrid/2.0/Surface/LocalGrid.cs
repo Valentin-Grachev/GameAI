@@ -8,7 +8,7 @@ public class LocalGrid
     private Graph _graph; public Graph graph => _graph; 
     public bool generated => _graph != null;
 
-    private Vector2 _startPosition, _size;
+    private Vector2 _startPosition, _size; public Vector2 startPosition => _startPosition;
     private float _edgeSize;
     private Obstacle[] _obstacles;
 
@@ -16,9 +16,11 @@ public class LocalGrid
     private int _cols; public int cols => _cols;
 
 
-    public LocalGrid(Vector2 startPosition, Vector2 size, float density, Obstacle[] obstacles)
+    public LocalGrid(Vector2 startPosition, Vector2 size, float edgeSize, Obstacle[] obstacles)
     {
-        Utils.SplitArea(size, density, out _edgeSize, out _rows, out _cols);
+        _edgeSize = edgeSize;
+        _rows = (int)(size.y / _edgeSize);
+        _cols = (int)(size.x / _edgeSize);
         _size = size;
         _startPosition = startPosition;
         _obstacles = obstacles;

@@ -46,11 +46,16 @@ public class BindingGraph
                 if (firstGrid == null) firstGrid = grid;
                 else { secondGrid = grid; break; }
             }
+
+        if (firstGrid == null || secondGrid == null)
+            throw new System.Exception($"Error node: id = {node.vertexId}, {node.position}");
+
     }
 
 
     private void BindNodeInsideGrid(Node node, LocalGrid grid)
     {
+        
         var insideNodes = GetNodesInsideGrid(grid, _nodes);
 
         foreach (var insideNode in insideNodes)
@@ -73,6 +78,7 @@ public class BindingGraph
     private List<Node> GetNodesInsideGrid(LocalGrid grid, List<Node> nodes)
     {
         var insideNodePositions = new List<Node>();
+        if (grid == null) throw new System.Exception("beda");
 
         for (int i = 0; i < nodes.Count; i++)
             if (grid.Overlap(nodes[i].position))
@@ -157,14 +163,22 @@ public class BindingGraph
             if (hasTransition)
                 transitions.Add((firstVertexPosition + secondVertexPosition) / 2f);
 
-
-
-
             // Цепочка проходов прервана
             else if (transitions.Count > 0)
             {
                 // Добавляем новый узел - середину прохода
                 Vector2 middlePosition = (transitions[0] + transitions[transitions.Count - 1]) / 2f;
+
+                switch (bindSide)
+                {
+                    case BindSide.Right:
+                        middlePosition.x = secondGrid.startPosition.x;
+                        break;
+
+                    case BindSide.Down:
+                        middlePosition.y = secondGrid.startPosition.y;
+                        break;
+                }
                 bindingNodes.Add(middlePosition);
                 transitions.Clear();
             }
@@ -174,6 +188,17 @@ public class BindingGraph
         {
             // Добавляем новый узел - середину прохода
             Vector2 middlePosition = (transitions[0] + transitions[transitions.Count - 1]) / 2f;
+
+            switch (bindSide)
+            {
+                case BindSide.Right:
+                    middlePosition.x = secondGrid.startPosition.x;
+                    break;
+
+                case BindSide.Down:
+                    middlePosition.y = secondGrid.startPosition.y;
+                    break;
+            }
 
             bindingNodes.Add(middlePosition);
             transitions.Clear();

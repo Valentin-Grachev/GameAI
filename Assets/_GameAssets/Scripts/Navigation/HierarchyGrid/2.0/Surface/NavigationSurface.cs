@@ -7,8 +7,8 @@ public class NavigationSurface : MonoBehaviour
     [SerializeField] private SurfaceData _data;
     [Space(10)]
     [SerializeField] private Vector2 _size;
-    [SerializeField][Range(0.1f, 2)] private float _surfaceDensity;
-    [SerializeField] [Range(1f, 100f)] private float _localGridDensity;
+    [SerializeField][Range(5f, 100f)] private float _localGridSize;
+    [SerializeField] [Range(0.1f, 10f)] private float _localGridEdgeSize;
     [Header("Gizmos Settings")]
     [SerializeField] private Color _gridVertexColor;
     [SerializeField] private Color _gridBorderColor;
@@ -21,18 +21,24 @@ public class NavigationSurface : MonoBehaviour
     private BindingGraph _bindingGraph;
 
     private int _localGridRows, _localGridCols;
-    private float _localGridSize;
 
     private void Awake() => LoadSurface();
 
 
 
-    [Button(nameof(Build))] public void Build()
+    [Button(nameof(BuildAndSave))] public void BuildAndSave()
     {
         CreateLocalGrids();
-        foreach (var localGrid in _localGrids) localGrid.Generate();
+
+        int i = 0;
+        foreach (var localGrid in _localGrids)
+        {
+            localGrid.Generate();
+            i++;
+        }
 
         BuildBingingGraph();
+        SaveSurface();
     }
 
     public bool BuildPath(Vector2 start, Vector2 finish, out List<Vector2> path)
@@ -58,8 +64,8 @@ public class NavigationSurface : MonoBehaviour
     {
         _size = _data.size;
         transform.position = _data.startPosition + new Vector2(_size.x / 2f, -_size.y / 2f);
-        _surfaceDensity = _data.surfaceDensity;
-        _localGridDensity = _data.localGridDensity;
+        _localGridSize = _data.localGridSize;
+        _localGridEdgeSize = _data.localGridEdgeSize;
         _bindingGraph = new BindingGraph(_data.nodePositions, _data.vertexEdges);
 
         CreateLocalGrids();
@@ -73,8 +79,8 @@ public class NavigationSurface : MonoBehaviour
 
         _data.startPosition = startPosition;
         _data.size = _size;
-        _data.surfaceDensity = _surfaceDensity;
-        _data.localGridDensity = _localGridDensity;
+        _data.localGridSize = _localGridSize;
+        _data.localGridEdgeSize = _localGridEdgeSize;
         _data.vertexEdges = new List<EdgeList>(_bindingGraph.graph.vertexEdges);
 
         _data.nodePositions = new List<Vector2>(_bindingGraph.nodes.Count);
@@ -99,31 +105,44 @@ public class NavigationSurface : MonoBehaviour
 
     private void CreateLocalGrids()
     {
-        Utils.SplitArea(_size, _surfaceDensity,
-            out _localGridSize, out _localGridRows, out _localGridCols);
+        _localGridRows = (int)(_size.y / _localGridSize);
+        _localGridCols = (int)(_size.x / _localGridSize);
 
         var obstacles = FindObjectsOfType<Obstacle>();
+
+        bool hasAddictiveColumn = false;
+        bool hasAddictiveRow = false;
 
         _localGrids = new List<LocalGrid>();
         for (int i = 0; i < _localGridRows + 1; i++)
         {
+            bool isLastRow = i == _localGridRows;
+
             for (int j = 0; j < _localGridCols + 1; j++)
             {
+                bool isLastColumn = j == _localGridCols;
+
                 Vector2 localStartPosition = startPosition + new Vector2(j * _localGridSize, -i * _localGridSize);
                 Vector2 size = Vector2.one * _localGridSize;
                 if (i == _localGridRows) size.y = _size.y - _localGridSize * _localGridRows;
                 if (j == _localGridCols) size.x = _size.x - _localGridSize * _localGridCols;
                 
                 var localGrid = new LocalGrid(localStartPosition, size, 
-                    _localGridDensity, obstacles);
-                
-                _localGrids.Add(localGrid);
-                
+                    _localGridEdgeSize, obstacles);
+
+                if (localGrid.cols > 0 && localGrid.rows > 0)
+                {
+                    _localGrids.Add(localGrid);
+
+                    if (isLastColumn) hasAddictiveColumn = true;
+                    if (isLastRow) hasAddictiveRow = true;
+                }
             }
         }
 
-        _localGridRows++;
-        _localGridCols++;
+        if (hasAddictiveColumn) _localGridCols++;
+        if (hasAddictiveRow) _localGridRows++;
+        
     }
 
     private void BuildBingingGraph()

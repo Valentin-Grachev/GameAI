@@ -12,8 +12,8 @@ public class AgentTest : MonoBehaviour
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _agent.SetDestination(mousePosition);
-            _navMeshAgent.isStopped = true;
-            _navMeshAgent.speed = 0f;
+            //_navMeshAgent.isStopped = true;
+            //_navMeshAgent.speed = 0f;
         }
         if (Input.GetMouseButtonDown(1))
         {

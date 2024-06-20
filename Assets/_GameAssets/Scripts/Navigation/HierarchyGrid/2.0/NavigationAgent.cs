@@ -15,6 +15,9 @@ public class NavigationAgent : MonoBehaviour
     private List<Vector2> _currentPath;
     private int _currentPointIndex;
 
+    private GameObject _instStartIcon;
+    private GameObject _instFinishIcon;
+
     private float epsilon => _speed * 0.1f;
 
 
@@ -38,8 +41,11 @@ public class NavigationAgent : MonoBehaviour
             _pathLine.SetPosition(i + 1, point);
         }
 
-        Instantiate(_startIcon, transform.position, Quaternion.identity);
-        Instantiate(_finishIcon, _currentPath[_currentPath.Count - 1], Quaternion.identity);
+        if (_instStartIcon != null) Destroy(_instStartIcon);
+        if (_instFinishIcon != null) Destroy(_instFinishIcon);
+
+        _instStartIcon = Instantiate(_startIcon, transform.position, Quaternion.identity);
+        _instFinishIcon = Instantiate(_finishIcon, _currentPath[_currentPath.Count - 1], Quaternion.identity);
     }
 
 

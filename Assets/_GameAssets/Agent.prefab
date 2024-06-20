@@ -239,7 +239,7 @@ Transform:
   m_GameObject: {fileID: 6729515038140355701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5015507021854863502}
@@ -350,6 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _surface: {fileID: 0}
   _speed: 2
+  _enableDrawing: 0
   _pathLine: {fileID: 2576744719840019648}
   _startIcon: {fileID: 4767002247232628783, guid: b1b4642ff67454940a0fab532ac86edb, type: 3}
   _finishIcon: {fileID: 4035019708312319237, guid: 451b667f57aea5349bb13c05578743ef, type: 3}
@@ -376,9 +377,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 6729515038241089707}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
-  m_Speed: 10
-  m_Acceleration: 50
+  m_Radius: 0.05
+  m_Speed: 20
+  m_Acceleration: 500
   avoidancePriority: 50
   m_AngularSpeed: 1000
   m_StoppingDistance: 1
